@@ -1,0 +1,33 @@
+#!/bin/bash
+
+rails_env='development'	#手動で指定
+#rails_env='production'
+
+CURENT=`pwd`	#実行ディレクトリの保存
+cd `dirname $0`	#railsアプリのディレクトリで作業をする
+
+# See how we were called.
+case "$1" in
+  start)
+	echo "start!!"
+	bundle exec unicorn -c config/unicorn.rb -E $rails_env -D
+	;;
+  stop)
+	echo "stop!!"
+	kill -QUIT `cat ./tmp/unicorn.pid`
+	;;
+  status)
+        status -p ${pidfile} $httpd
+	RETVAL=$?
+	;;
+  restart)
+	echo "restart"
+	kill -QUIT `cat ./tmp/unicorn.pid`
+	bundle exec unicorn -c config/unicorn.rb -E $rails_env -D
+  	;;
+  force-reload|reload)
+        reload
+	;;
+esac
+cd $CURENT  #元のディレクトリに戻る
+exit

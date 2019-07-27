@@ -1,0 +1,271 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require font-awesome
+ *
+ */
+
+$light:                             #444;
+$white:                             #fff;
+$gray:                              #444 ;
+$gray-darker:                       #222 ;
+$gray-dark:                         #282828 ;
+$gray-light:                        #888 ;
+
+$link-color:                        #6df;
+$nav-hover-bg-color:                #555;
+$nav-active-bg-color:               #222;
+$navbar-light-color:                $white;
+$navbar-light-hover-color:          #4cf;
+$navbar-light-active-color:         $white;
+$navbar-light-toggler-border-color: transparent;
+$dropdown-link-hover-bg:            $link-color;
+$dropdown-link-active-bg:           $link-color;
+$table-border-color:                #888 ;
+$table-hover-bg:                    $gray;
+$nav-border-color:                  MediumSeaGreen;
+
+// Cyborgテーマからページネーションのカラーリングをコピー
+$pagination-color:                  #fff;
+$pagination-bg:                     $gray-darker;
+$pagination-border-color:           #888;
+$pagination-border-width:           0.05rem;
+
+$pagination-hover-color:            #fff;
+$pagination-hover-bg:               #2A9FD6;
+$pagination-hover-border-color:     transparent;
+
+$pagination-active-color:           #fff;
+$pagination-active-bg:              #2A9FD6;
+$pagination-active-border-color:    transparent;
+
+$pagination-disabled-color:         $gray-light;
+$pagination-disabled-bg:            $gray-darker;
+$pagination-disabled-border-color:  #888;
+
+@import "bootswatch/darkly/variables";
+@import "bootstrap";
+
+
+body { padding-top: 5rem; }
+
+@import "bootswatch/darkly/bootswatch";
+
+.navbar-custom {
+    border-color: $nav-border-color;
+    border-style: none none solid none;
+    border-width: 0.3rem;
+}
+
+.navbar-custom .navbar-brand,{
+    padding: .8rem .5rem;
+}
+.navbar-custom .navbar-nav .nav-link{
+    padding: 1rem .5rem;
+}
+
+.navbar-custom .navbar-brand:hover {
+    color: $navbar-light-hover-color;
+}
+
+.navbar-custom .nav-item.show .nav-link {
+    background-color: $nav-active-bg-color;
+}
+
+.navbar-custom .nav-item:hover .nav-link {
+    background-color: $nav-hover-bg-color;
+}
+
+.dropdown-menu .dropdown-item:hover, .dropdown-menu .dropdown-item:focus {
+    color: #fff;
+    background-color: #007fff;
+}
+
+.pagination li a {
+    padding: .8rem 1rem;
+}
+
+.page-item {
+    white-space: nowrap
+}
+
+.page-item.disabled {
+    cursor: not-allowed;
+}
+
+
+h2 {
+    font-size: 1.7rem;
+    font-weight: bold;
+    margin-top: 0.5rem;
+}
+
+label {
+    font-weight: bold;
+}
+
+::placeholder {
+    color: #ccc;
+}
+
+.card.top {
+    border-color: #aaa;
+    border-style: solid;
+    border-width: 0.05rem;
+    box-shadow: .3rem .3rem .3rem rgba(0,0,0,0.2);
+    margin-bottom: 1rem;
+}
+
+.card.desc {
+    border-color: #aaa;
+    border-style: solid;
+    border-width: 0.05em;
+    box-shadow: .3rem .3rem .3rem rgba(0,0,0,0.2);
+    margin-bottom: 1rem;
+}
+
+.card.desc .card-header {
+    margin-left: 1px;
+    cursor: pointer;
+}
+
+.formText {
+    border-left: 0.2em solid #48f !important;
+}
+
+p.formText {
+    padding-left:0.3em;
+}
+
+.formNum {
+    border-left: 0.2em dashed red !important;
+}
+
+p.formNum {
+    padding-left:0.3em;
+}
+
+.example_select{
+    background-color: #ddd;
+    border-left: 0.5em solid #282;
+    color: #222;
+    padding: 0.5em 0.8em;
+}
+
+.pointer{
+    cursor:pointer;
+}
+
+.closed{
+    display:none;
+}
+
+td.sign{
+    font-size: x-large;
+}
+
+th.sep,td.sep{
+    border-left: 3px solid $table-border-color;
+}
+
+tr.sep{
+    border-top: 4px solid $table-border-color;
+}
+
+table tbody:nth-child(1) span.act_desc{
+    font-size:80%;
+}
+
+table tbody:nth-child(1) td{
+    background-color: #666;
+}
+
+table tbody:nth-child(1) td:hover{
+    background-color: #444;
+}
+
+table tbody.tbody_toggle td{
+    background-color: #666;
+    padding-left: 2em;
+}
+
+table tbody.tbody_toggle td:hover{
+    background-color: #444;
+}
+
+$submit-color: $gray;
+
+button.submit {
+    background-color: $submit-color;
+    border: 0.2rem solid #fff;
+    box-shadow: 0 0.1rem 0.5rem rgba(0,0,0,0.2);
+    color: #fff;
+    font-weight: bold;
+    padding: 0.5rem 0.8rem;
+    transition: 0.2s linear;
+}
+
+button.submit:hover {
+    background-color: #fff;
+    border: 0.2rem solid $submit-color;
+    color: $submit-color;
+}
+
+input[type=checkbox] {
+    cursor: pointer;
+}
+
+input + label:hover {
+    cursor: pointer;
+}
+
+input + label:hover {
+    background: linear-gradient(transparent 70%, #2A9FD6 0%);
+}
+
+span.after_space::after {
+    content: "　" ;
+}
+
+@media screen and (max-width:767px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    table.search_toggle {
+        border-collapse: collapse;
+        td, th {
+            display: block;
+        }
+    }
+    td.indent {
+        border:  0rem;
+        padding: 0rem;
+    }
+
+    .pagination {
+        display: inline;
+    }
+
+    .pagination li {
+        display: inline-block;
+    }
+
+    span.mobile_br::after {
+        content: "\a" ;
+        white-space: pre ;
+    }
+
+    ul{
+        padding-left: 1rem;
+    }
+}
