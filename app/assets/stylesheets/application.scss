@@ -55,10 +55,10 @@ $pagination-disabled-border-color:  #888;
 @import "bootswatch/darkly/variables";
 @import "bootstrap";
 
-
 body { padding-top: 5rem; }
 
 @import "bootswatch/darkly/bootswatch";
+@import "tempusdominus-bootstrap-4.css";
 
 .navbar-custom {
     border-color: $nav-border-color;

@@ -27,9 +27,6 @@
       %tr
       %tr
         %td.indent
-        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "更新回", params_name: "created_at_form", placeholder: nil, colspan: 3)
-      %tr
-        %td.indent
         - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "ENo", params_name: "e_no_form", placeholder: "Number")
         - td_form(f, @form_params, @placeholder, class_name: "formText", label: "キャラクター名", params_name: "pc_name_form", placeholder: "Name")
       %tr
@@ -55,13 +52,12 @@
         - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "隊列", params_name: "line_id_form", placeholder: "Number", colspan: 3)
       %tr
         %td.indent
-        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "取得日", params_name: "created_at_form", placeholder: "Number", colspan: 3)
+        - td_date_between_form(f, @form_params, @placeholder, class_name: nil,  label: "取得日", params_name: "created_at", data_target: "date", placeholder: nil, colspan: 3)
       %tr.sep
         %td.indent
         %td.indent= hidden_field_tag :is_form, 1
         %td{colspan: "3"}
           - search_submit_button
-
 
 = paginate(@statuses)
 %br

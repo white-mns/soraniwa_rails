@@ -18,6 +18,9 @@
 //= require bootstrap-sprockets
 //= require "jquery.cleanQuery"
 //= require chartkick
+//= require moment
+//= require moment/ja.js
+//= require tempusdominus-bootstrap-4.js
 
 // 検索遷移時の検索フォームの閉じる処理
 function search_close() {
@@ -82,6 +85,17 @@ function exec_load() {
     });
 }
 
+var data_date = {
+    'format': 'YYYY-MM-DD' ,
+    'icons': {
+        time: "fa fa-clock-o",
+        date: "fa fa-calendar",
+        up: "fa fa-arrow-up",
+        down: "fa fa-arrow-down",
+        previous: "fa fa-arrow-left",
+        next: "fa fa-arrow-right"
+    }
+};
 // ページ移動時の発火処理
 var turboReady = function(){
 	var url     = location.href;
@@ -93,6 +107,8 @@ var turboReady = function(){
 	}
 
     $('FORM').cleanQuery();
+
+    $('.datepicker').datetimepicker(data_date);
 
     set_triggers();
     exec_load();

@@ -19,7 +19,8 @@ class StatusesController < ApplicationController
 
     params_clean(params)
     if !params["is_form"] then
-        params["created_at_form"] ||= sprintf("%d",@latest_created)
+        params["created_at_gteq_form"] ||= @latest_created.to_date.to_s
+        params["created_at_lteq_form"] ||= @latest_created.to_date.to_s
     end
 
     params_to_form(params, @form_params, column_name: "pc_name_name", params_name: "pc_name_form", type: "text")
@@ -38,6 +39,12 @@ class StatusesController < ApplicationController
 
     params_to_form(params, @form_params, column_name: "battle_type_name", params_name: "battle_type_form", type: "text")
     params_to_form(params, @form_params, column_name: "fan_of_flower_name", params_name: "fan_of_flower_form", type: "text")
+
+    params[:q]["created_at_gteq"] = params["created_at_gteq_form"] && params["created_at_gteq_form"] != "" ? params["created_at_gteq_form"] + " 00:00:00" : nil;
+    params[:q]["created_at_lteq"] = params["created_at_lteq_form"] && params["created_at_lteq_form"] != "" ? params["created_at_lteq_form"] + " 23:59:00" : nil;
+
+    @form_params["created_at_gteq_form"] = params["created_at_gteq_form"]
+    @form_params["created_at_lteq_form"] = params["created_at_lteq_form"]
   end
   # GET /statuses/1
   #def show
