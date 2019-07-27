@@ -148,19 +148,15 @@ module ApplicationHelper
         end
     end
 
-
-    def all_assembly_text(assembly)
-        if !assembly then
+    def battle_type_border(object)
+        if !object then 
             return
         end
 
-        assembly_text = ""
+        border_colors = ["#ff2222","#449922","#2222cc","#cc2222","#bbbb00","#f09966","#25bf8b","#ffb050","#ab5de7","#88bbff","#30d0ee","#55f077","#ddbb60","#bb6640","#664ff5","#999999","#f96c24"]
+        border_style = ""
+        border_style = "0.2rem " + border_colors[object.battle_type_color_id] + " solid"
 
-        assembly.each do |parts|
-          assembly_text += parts.orig_name_name.name + "、" if parts.orig_name_name
-        end
-
-        assembly_text.chop()
+        "border-left: " + border_style;
     end
-
 end

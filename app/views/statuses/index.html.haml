@@ -1,0 +1,104 @@
+- @page_title = "ステータス一覧"
+%h1= @page_title
+
+.card.desc
+  .card-header
+    - act_icon(true)
+    検索仕様
+    - act_desc(true)
+  .card-body
+    = render "layouts/base_desc"
+    %p
+      %span.example_select.example_toggle.pointer
+        - help_icon
+        入力例
+        - act_desc(false)
+    #example.closed
+      = render "layouts/input_desc"
+= search_form_for @search do |f|
+  %table.search_toggle.table.table-striped.table-bordered.table-hover
+    %tbody.pointer
+      %tr
+        %td{colspan: "5"}
+          - act_icon(true)
+          絞り込み検索
+          - act_desc(true)
+    %tbody
+      %tr
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "更新回", params_name: "created_at_form", placeholder: nil, colspan: 3)
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "ENo", params_name: "e_no_form", placeholder: "Number")
+        - td_form(f, @form_params, @placeholder, class_name: "formText", label: "キャラクター名", params_name: "pc_name_form", placeholder: "Name")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "STR", params_name: "str_form", placeholder: "Number")
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "MAG", params_name: "mag_form", placeholder: "Number")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "AGI", params_name: "agi_form", placeholder: "Number")
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "VIT", params_name: "vit_form", placeholder: "Number")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "DEX", params_name: "dex_form", placeholder: "Number")
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "MNT", params_name: "mnt_form", placeholder: "Number")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "タイプ", params_name: "battle_type_form", placeholder: "BattleType", colspan: 3)
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "推し花", params_name: "fan_of_flower_form", placeholder: "FanFlower", colspan: 3)
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "隊列", params_name: "line_id_form", placeholder: "Number", colspan: 3)
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "取得日", params_name: "created_at_form", placeholder: "Number", colspan: 3)
+      %tr.sep
+        %td.indent
+        %td.indent= hidden_field_tag :is_form, 1
+        %td{colspan: "3"}
+          - search_submit_button
+
+
+= paginate(@statuses)
+%br
+ヒット数：#{ @count }件
+%br
+%br
+
+%table.table.table-striped.table-bordered.table-hover
+  %thead
+    %tr
+      %th= sort_link(@search, :e_no,"キャラクター(ENo)", default_order: :desc)
+      %th.sep= sort_link(@search, :str, "STR", default_order: :desc)
+      %th= sort_link(@search, :mag, "MAG", default_order: :desc)
+      %th= sort_link(@search, :agi, "AGI", default_order: :desc)
+      %th= sort_link(@search, :vit, "VIT", default_order: :desc)
+      %th= sort_link(@search, :dex, "DEX", default_order: :desc)
+      %th= sort_link(@search, :mnt, "MNT", default_order: :desc)
+      %th.sep= sort_link(@search, :battle_type_id, "タイプ", default_order: :desc)
+      %th= sort_link(@search, :fan_of_flower_id, "推し花", default_order: :desc)
+      %th= sort_link(@search, :line_id, "隊列", default_order: :desc)
+      %th.sep= sort_link(@search, :created_at, "取得日", default_order: :desc)
+      %th.sep{colspan: "2"} 結果リンク
+  %tbody
+    - @statuses.each do |status|
+      %tr
+        %td= pc_name_text(status.e_no, status.pc_name)
+        %td.sep= status.str
+        %td= status.mag
+        %td= status.agi
+        %td= status.vit
+        %td= status.dex
+        %td= status.mnt
+        %td{style: "#{ battle_type_border(status) }" }= status.battle_type.name if status.battle_type
+        %td= status.fan_of_flower.name if status.fan_of_flower
+        %td
+          = "前列" if status.line_id == 0
+          = "後列" if status.line_id == 1
+        %td.sep= status.created_at.to_s(:jp_date)
+        %td.sep= character_link(status.e_no)
+= paginate(@statuses)
