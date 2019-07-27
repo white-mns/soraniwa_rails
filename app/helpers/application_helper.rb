@@ -1,6 +1,6 @@
 module ApplicationHelper
     def page_title
-        title = "定期更新ゲーム過去結果データ小屋"
+        title = "ソラニワデータ小屋"
         title = @page_title + " | " + title if @page_title
         title
     end
@@ -32,7 +32,7 @@ module ApplicationHelper
         if e_no <= 0 then return end
 
         file_name = sprintf("%d",e_no)
-        link_to " 最終結果", "https://xxx.xxx/"+file_name+".html", :target => "_blank"
+        link_to " キャラクター", "http://st.x0.to/?mode=profile&eno="+file_name+"", :target => "_blank"
     end
     
     def character_old_link(latest_result_no, e_no, result_no, generate_no)
