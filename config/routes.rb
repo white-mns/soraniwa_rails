@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :skills
+  resources :skill_data
+  resources :type_names
+  resources :statuses
   resources :uploaded_checks
   resources :proper_names
   resources :names

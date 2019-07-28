@@ -98,7 +98,6 @@ module ApplicationHelper
             td_text_checkbox(f, form_params, placeholders, class_name: class_name, colspan: colspan, checkboxes: checkboxes)
         end
     end
-
     def td_text_form(f, form_params, placeholders, class_name: nil, colspan: nil, params_name: nil, placeholder: nil)
         haml_tag :td, class: class_name, colspan: colspan do
             haml_concat text_field_tag params_name.to_sym, form_params[params_name], placeholder: placeholders[placeholder]
@@ -124,6 +123,35 @@ module ApplicationHelper
         end
     end
 
+    def td_date_between_form(f, form_params, placeholders, class_name: nil, colspan: nil, label: nil, params_name: nil, placeholder: nil, checkboxes: nil, label_td_class_name: nil, data_target: nil)
+        haml_tag :td, class: label_td_class_name do
+            if label then
+                haml_concat f.label params_name.to_sym, label
+            end
+        end
+
+        # 日付選択フォームの描画
+        if !params_name.nil?  then
+            haml_tag :td, class: class_name, colspan: colspan do
+                div_date_form(f, form_params, placeholders, class_name: class_name, colspan: colspan, params_name: params_name + "_gteq_form", placeholder: placeholder, data_target: data_target + "_gteq")
+                haml_concat "　～　"
+                div_date_form(f, form_params, placeholders, class_name: class_name, colspan: colspan, params_name: params_name + "_lteq_form", placeholder: placeholder, data_target: data_target + "_lteq")
+            end
+        end
+    end
+
+    def div_date_form(f, form_params, placeholders, class_name: nil, colspan: nil, params_name: nil, placeholder: nil, data_target: nil)
+        haml_tag :div, class: "input-group date datepicker", id: data_target, style: "width:12rem; display:inline-block;", data: {target: {input: "nearest"}} do
+            haml_concat text_field_tag params_name.to_sym, form_params[params_name], class: "form-control datetimepicker-input", style:"width:10rem; float:left;", data: {target: "#" + data_target}, placeholder: placeholders[placeholder]
+            haml_tag :div, class: "input-group-append", data: {target: "#" + data_target, toggle: "datetimepicker"} do
+                haml_tag :div, class: "input-group-text" do
+                    haml_tag :i, class: "fa fa-calendar"
+                end
+            end
+        end
+    end
+
+
     def tbody_toggle(form_params, params_name: nil, label: {open: "", close: ""}, act_desc: nil, base_first: false)
         haml_tag :tbody, class: "tbody_toggle pointer"do
             haml_tag :tr do
@@ -148,19 +176,15 @@ module ApplicationHelper
         end
     end
 
-
-    def all_assembly_text(assembly)
-        if !assembly then
+    def type_border(object)
+        if !object then 
             return
         end
 
-        assembly_text = ""
+        border_colors = ["#ff2222","#449922","#2222cc","#cc2222","#bbbb00","#f09966","#25bf8b","#ffb050","#ab5de7","#88bbff","#30d0ee","#55f077","#ddbb60","#bb6640","#664ff5","#999999","#f96c24"]
+        border_style = ""
+        border_style = "0.2rem " + border_colors[object.type_id] + " solid"
 
-        assembly.each do |parts|
-          assembly_text += parts.orig_name_name.name + "、" if parts.orig_name_name
-        end
-
-        assembly_text.chop()
+        "border-left: " + border_style;
     end
-
 end

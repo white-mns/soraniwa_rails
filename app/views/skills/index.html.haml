@@ -1,0 +1,78 @@
+- @page_title = "設定スキル一覧"
+%h1= @page_title
+
+.card.desc
+  .card-header
+    - act_icon(true)
+    検索仕様
+    - act_desc(true)
+  .card-body
+    = render "layouts/base_desc"
+    %p
+      %span.example_select.example_toggle.pointer
+        - help_icon
+        入力例
+        - act_desc(false)
+    #example.closed
+      = render "layouts/input_desc"
+= search_form_for @search do |f|
+  %table.search_toggle.table.table-striped.table-bordered.table-hover
+    %tbody.pointer
+      %tr
+        %td{colspan: "5"}
+          - act_icon(true)
+          絞り込み検索
+          - act_desc(true)
+    %tbody
+      %tr
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "ENo", params_name: "e_no_form", placeholder: "Number")
+        - td_form(f, @form_params, @placeholder, class_name: "formText", label: "キャラクター名", params_name: "pc_name_form", placeholder: "Name")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "スキル名", params_name: "skill_form", placeholder: "Skill", colspan: 3)
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "タイプ", params_name: "type_form", placeholder: "Type")
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "発動条件", params_name: "timing_form", placeholder: "Timing")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "説明", params_name: "skill_text_form", placeholder: "SkillText", colspan: 3)
+      %tr
+        %td.indent
+        - td_date_between_form(f, @form_params, @placeholder, class_name: nil,  label: "取得日", params_name: "created_at", data_target: "date", placeholder: nil, colspan: 3)
+      %tr.sep
+        %td.indent
+        %td.indent= hidden_field_tag :is_form, 1
+        %td{colspan: "3"}
+          - search_submit_button
+
+
+= paginate(@skills)
+%br
+ヒット数：#{ @count }件
+%br
+%br
+
+%table.table.table-striped.table-bordered.table-hover
+  %thead
+    %tr
+      %th= sort_link(@search, :e_no,"キャラクター(ENo)", default_order: :desc)
+      %th.sep= sort_link(@search, :set_no, "No", default_order: :desc)
+      %th.sep= sort_link(@search, :type_id, "タイプ", default_order: :desc)
+      %th= sort_link(@search, :skill_id, "スキル名", default_order: :desc)
+      %th.sep= sort_link(@search, :timing_id, "発動条件", default_order: :desc)
+      %th= sort_link(@search, :skill_text, "説明", default_order: :desc)
+      %th.sep{colspan: "2"} 結果リンク
+  %tbody
+    - @skills.each do |skill|
+      %tr
+        %td= pc_name_text(skill.e_no, skill.pc_name)
+        %td.sep= skill.set_no
+        %td{style: "#{ type_border(skill) }" }= skill.type.name if skill.type
+        %td= skill.skill.name if skill.skill
+        %td.sep= skill.timing.name if skill.timing
+        %td= skill.skill.text if skill.skill
+        %td.sep= character_link(skill.e_no)
+= paginate(@skills)

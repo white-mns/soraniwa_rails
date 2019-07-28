@@ -5,6 +5,10 @@ class ApplicationRecord < ActiveRecord::Base
     where.not(result_no: nil)
   }
 
+  scope :notnil_date, -> () {
+    where.not(created_at: nil)
+  }
+
   # 検索ヒット件数の取得
   #   通常時：      整数
   #   グループ化時：ハッシュのキーの数(グループ化後のヒット数)

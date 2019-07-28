@@ -14,51 +14,62 @@
  *
  */
 
-$light:                             #444;
-$white:                             #fff;
-$gray:                              #444 ;
-$gray-darker:                       #222 ;
-$gray-dark:                         #282828 ;
-$gray-light:                        #888 ;
+$light:                             #008050;
+$white:                             #fffcf8;
+$gray:                              #444;
+$gray-darker:                       #222;
+$gray-dark:                         #282828;
+$gray-light:                        #444;
+$sepia-light:                       #fdf6e6;
+$sepia-stripe:                      #faf0e0;
+$sepia:                             #e8d8c0;
+$sepia-border:                      #886622;
+$sepia-border-dark:                 #664400;
 
-$link-color:                        #6df;
-$nav-hover-bg-color:                #555;
-$nav-active-bg-color:               #222;
+$body-color:                        $gray-light;
+$link-color:                        #48e;
+$heading-color:                     $gray-light;
+$card-color:                        $gray-light;
+$card-cap-bg:                       $sepia-stripe;
+$nav-hover-bg-color:                #239640;
+$nav-active-bg-color:               #017420;
 $navbar-light-color:                $white;
-$navbar-light-hover-color:          #4cf;
+$navbar-light-hover-color:          #8df;
 $navbar-light-active-color:         $white;
 $navbar-light-toggler-border-color: transparent;
 $dropdown-link-hover-bg:            $link-color;
 $dropdown-link-active-bg:           $link-color;
-$table-border-color:                #888 ;
-$table-hover-bg:                    $gray;
-$nav-border-color:                  MediumSeaGreen;
+$table-bg:                          $sepia-light;
+$table-accent-bg:                   $sepia-stripe;
+$table-border-color:                $sepia-border;
+$table-hover-bg:                    $sepia;
+$nav-border-color:                  #a9d066;
 
 // Cyborgテーマからページネーションのカラーリングをコピー
-$pagination-color:                  #fff;
-$pagination-bg:                     $gray-darker;
-$pagination-border-color:           #888;
+$pagination-color:                  $gray;
+$pagination-bg:                     $sepia-light;
+$pagination-border-color:           $sepia-border;
 $pagination-border-width:           0.05rem;
 
-$pagination-hover-color:            #fff;
-$pagination-hover-bg:               #2A9FD6;
+$pagination-hover-color:            $gray;
+$pagination-hover-bg:               $sepia;
 $pagination-hover-border-color:     transparent;
 
-$pagination-active-color:           #fff;
-$pagination-active-bg:              #2A9FD6;
+$pagination-active-color:           $gray;
+$pagination-active-bg:              $sepia;
 $pagination-active-border-color:    transparent;
 
-$pagination-disabled-color:         $gray-light;
-$pagination-disabled-bg:            $gray-darker;
-$pagination-disabled-border-color:  #888;
+$pagination-disabled-color:         $gray;
+$pagination-disabled-bg:            $sepia;
+$pagination-disabled-border-color:  $sepia-border;
 
-@import "bootswatch/darkly/variables";
+@import "bootswatch/minty/variables";
 @import "bootstrap";
-
 
 body { padding-top: 5rem; }
 
-@import "bootswatch/darkly/bootswatch";
+@import "bootswatch/minty/bootswatch";
+@import "tempusdominus-bootstrap-4.css";
 
 .navbar-custom {
     border-color: $nav-border-color;
@@ -118,6 +129,7 @@ label {
 }
 
 .card.top {
+    background-color: $sepia-light;
     border-color: #aaa;
     border-style: solid;
     border-width: 0.05rem;
@@ -155,7 +167,7 @@ p.formNum {
 }
 
 .example_select{
-    background-color: #ddd;
+    background-color: $sepia-stripe;
     border-left: 0.5em solid #282;
     color: #222;
     padding: 0.5em 0.8em;
@@ -186,23 +198,23 @@ table tbody:nth-child(1) span.act_desc{
 }
 
 table tbody:nth-child(1) td{
-    background-color: #666;
+    background-color: $sepia-stripe;
 }
 
 table tbody:nth-child(1) td:hover{
-    background-color: #444;
+    background-color: $sepia;
 }
 
 table tbody.tbody_toggle td{
-    background-color: #666;
+    background-color: $sepia-stripe;
     padding-left: 2em;
 }
 
 table tbody.tbody_toggle td:hover{
-    background-color: #444;
+    background-color: $sepia;
 }
 
-$submit-color: $gray;
+$submit-color: $sepia-border-dark;
 
 button.submit {
     background-color: $submit-color;

@@ -1,0 +1,97 @@
+class SkillsController < ApplicationController
+  include MyUtility
+  before_action :set_skill, only: [:show, :edit, :update, :destroy]
+
+  # GET /skills
+  def index
+    placeholder_set
+    param_set
+    @count	= Skill.notnil_date().includes(:pc_name, :type, :nature, :timing, :skill).search(params[:q]).result.hit_count()
+    @search	= Skill.notnil_date().includes(:pc_name, :type, :nature, :timing, :skill).page(params[:page]).search(params[:q])
+    @search.sorts = "id asc" if @search.sorts.empty?
+    @skills	= @search.result.per(50)
+  end
+
+  def param_set
+    @form_params = {}
+
+    @latest_created = UploadedCheck.maximum("created_at")
+
+    params_clean(params)
+    if !params["is_form"] then
+        params["created_at_gteq_form"] ||= @latest_created.to_date.to_s
+        params["created_at_lteq_form"] ||= @latest_created.to_date.to_s
+    end
+
+    params_to_form(params, @form_params, column_name: "pc_name_name", params_name: "pc_name_form", type: "text")
+    params_to_form(params, @form_params, column_name: "e_no", params_name: "e_no_form", type: "number")
+    params_to_form(params, @form_params, column_name: "set_no", params_name: "set_no_form", type: "number")
+    params_to_form(params, @form_params, column_name: "skill_type_id", params_name: "skill_type_id_form", type: "number")
+    params_to_form(params, @form_params, column_name: "type_id", params_name: "type_id_form", type: "number")
+    params_to_form(params, @form_params, column_name: "nature_id", params_name: "nature_id_form", type: "number")
+    params_to_form(params, @form_params, column_name: "skill_id", params_name: "skill_id_form", type: "number")
+    params_to_form(params, @form_params, column_name: "name", params_name: "name_form", type: "number")
+    params_to_form(params, @form_params, column_name: "timing_id", params_name: "timing_id_form", type: "number")
+
+    params_to_form(params, @form_params, column_name: "type_name", params_name: "type_form", type: "text")
+    params_to_form(params, @form_params, column_name: "nature_name", params_name: "nature_form", type: "text")
+    params_to_form(params, @form_params, column_name: "timing_name", params_name: "timing_form", type: "text")
+    params_to_form(params, @form_params, column_name: "skill_name", params_name: "skill_form", type: "text")
+    params_to_form(params, @form_params, column_name: "skill_text", params_name: "skill_text_form", type: "text")
+
+    params[:q]["created_at_gteq"] = params["created_at_gteq_form"] && params["created_at_gteq_form"] != "" ? params["created_at_gteq_form"] + " 00:00:00" : nil;
+    params[:q]["created_at_lteq"] = params["created_at_lteq_form"] && params["created_at_lteq_form"] != "" ? params["created_at_lteq_form"] + " 23:59:00" : nil;
+
+    @form_params["created_at_gteq_form"] = params["created_at_gteq_form"]
+    @form_params["created_at_lteq_form"] = params["created_at_lteq_form"]
+  end
+  # GET /skills/1
+  #def show
+  #end
+
+  # GET /skills/new
+  #def new
+  #  @skill = Skill.new
+  #end
+
+  # GET /skills/1/edit
+  #def edit
+  #end
+
+  # POST /skills
+  #def create
+  #  @skill = Skill.new(skill_params)
+
+  #  if @skill.save
+  #    redirect_to @skill, notice: "Skill was successfully created."
+  #  else
+  #    render action: "new"
+  #  end
+  #end
+
+  # PATCH/PUT /skills/1
+  #def update
+  #  if @skill.update(skill_params)
+  #    redirect_to @skill, notice: "Skill was successfully updated."
+  #  else
+  #    render action: "edit"
+  #  end
+  #end
+
+  # DELETE /skills/1
+  #def destroy
+  #  @skill.destroy
+  #  redirect_to skills_url, notice: "Skill was successfully destroyed."
+  #end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_skill
+      @skill = Skill.find(params[:id])
+    end
+
+    # Only allow a trusted parameter "white list" through.
+    def skill_params
+      params.require(:skill).permit(:e_no, :set_no, :skill_type_id, :type_id, :nature_id, :skill_id, :name, :timing_id)
+    end
+end

@@ -73,3 +73,5 @@ gem 'ransack'
 gem 'composite_primary_keys'
 gem 'chartkick'
 gem 'font-awesome-rails'
+gem 'momentjs-rails'
+gem "bootstrap4-datetime-picker-rails"

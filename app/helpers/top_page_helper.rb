@@ -1,21 +1,13 @@
 module TopPageHelper
-    def top_text(result_no, generate_no, uploaded)
-        if !result_no then return "---" end
-        generate_text = ""
-        generate_text = "再" if generate_no > 0
-        num = 2
+    def top_date_text(created_at, uploaded)
+        if !created_at then return "---" end
+        
+        text = created_at.to_s(:jp_date)
 
-        while num <= generate_no do
-            num += 1
-            generate_text += "再"
-        end
-
-        text = "第" + sprintf("%d", result_no) + "回" + generate_text
-
-        if result_no == uploaded then
-            text += "更新結果まで反映済です。"
+        if created_at == uploaded then
+            text += " 早朝のデータまで反映しています"
         else
-            text += "更新結果のデータに更新中です…"
+            text += " のデータに更新中です…"
         end
 
         text
