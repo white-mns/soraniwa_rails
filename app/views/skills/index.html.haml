@@ -59,20 +59,20 @@
   %thead
     %tr
       %th= sort_link(@search, :e_no,"キャラクター(ENo)", default_order: :desc)
-      %th= sort_link(@search, :set_no, "No", default_order: :desc)
-      %th= sort_link(@search, :type_id, "タイプ", default_order: :desc)
+      %th.sep= sort_link(@search, :set_no, "No", default_order: :desc)
+      %th.sep= sort_link(@search, :type_id, "タイプ", default_order: :desc)
       %th= sort_link(@search, :skill_id, "スキル名", default_order: :desc)
-      %th= sort_link(@search, :timing_id, "発動条件", default_order: :desc)
+      %th.sep= sort_link(@search, :timing_id, "発動条件", default_order: :desc)
       %th= sort_link(@search, :skill_text, "説明", default_order: :desc)
       %th.sep{colspan: "2"} 結果リンク
   %tbody
     - @skills.each do |skill|
       %tr
         %td= pc_name_text(skill.e_no, skill.pc_name)
-        %td= skill.set_no
+        %td.sep= skill.set_no
         %td{style: "#{ type_border(skill) }" }= skill.type.name if skill.type
         %td= skill.skill.name if skill.skill
-        %td= skill.timing.name if skill.timing
+        %td.sep= skill.timing.name if skill.timing
         %td= skill.skill.text if skill.skill
         %td.sep= character_link(skill.e_no)
 = paginate(@skills)

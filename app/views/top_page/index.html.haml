@@ -1,10 +1,10 @@
-%h1 定期更新ゲーム過去結果データ小屋
+%h1 ソラニワデータ小屋
 %p
   このサイトでは
-  %a{:href => "https://archives.teiki.org/", :target => "_blank"} 定期更新ゲーム名
+  %a{:href => "http://st.x0.to/", :target => "_blank"} ソラニワ -Stroll Green-
   を解析して得られる情報を扱っています。
 %br
-%p= top_text(@latest_result, @latest_generate, @uploaded_result)
+%p= top_date_text(@latest_created, @uploaded_created)
 
 .card.top
   .card-body
@@ -14,6 +14,8 @@
         %ul
           %li 個人データ
           %ul  
+            %li= link_to "ステータス一覧", statuses_path
+            %li= link_to "設定スキル一覧", skills_path
       .col-md-6
         %ul
           %li 結果データ
@@ -22,6 +24,6 @@
   .card-body
     %h2 更新履歴
     %ul
-      %li 20--/-/-
+      %li 2019/7/28
       %ul
         %li サイト公開
