@@ -52,6 +52,11 @@
         - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "隊列", params_name: "line_id_form", placeholder: "Number", colspan: 3)
       %tr
         %td.indent
+        - td_form(f, @form_params, @placeholder, params_name: "equip_form",label: "隊列", colspan: 3, label_td_class_name: "indent",
+                    checkboxes: [{label: "前列", params_name: "is_front", class_name: "after_space mobile_br"},
+                                 {label: "後列", params_name: "is_back"}])
+      %tr
+        %td.indent
         - td_date_between_form(f, @form_params, @placeholder, class_name: nil,  label: "取得日", params_name: "created_at", data_target: "date", placeholder: nil, colspan: 3)
       %tr.sep
         %td.indent
