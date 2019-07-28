@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_27_100018) do
+ActiveRecord::Schema.define(version: 2019_07_28_013856) do
 
   create_table "names", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
     t.integer "e_no"
@@ -56,6 +56,15 @@ ActiveRecord::Schema.define(version: 2019_07_27_100018) do
     t.index ["str"], name: "index_statuses_on_str"
     t.index ["type_id"], name: "index_statuses_on_type_id"
     t.index ["vit"], name: "index_statuses_on_vit"
+  end
+
+  create_table "type_names", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.integer "type_id"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_type_names_on_name"
+    t.index ["type_id"], name: "index_type_names_on_type_id"
   end
 
   create_table "uploaded_checks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|

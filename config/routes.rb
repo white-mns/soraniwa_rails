@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :type_names
   resources :statuses
   resources :uploaded_checks
   resources :proper_names

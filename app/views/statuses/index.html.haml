@@ -75,7 +75,7 @@
       %th= sort_link(@search, :vit, "VIT", default_order: :desc)
       %th= sort_link(@search, :dex, "DEX", default_order: :desc)
       %th= sort_link(@search, :mnt, "MNT", default_order: :desc)
-      %th.sep= sort_link(@search, :battle_type_id, "タイプ", default_order: :desc)
+      %th.sep= sort_link(@search, :type_id, "タイプ", default_order: :desc)
       %th= sort_link(@search, :fan_of_flower_id, "推し花", default_order: :desc)
       %th= sort_link(@search, :line_id, "隊列", default_order: :desc)
       %th.sep= sort_link(@search, :created_at, "取得日", default_order: :desc)
@@ -90,7 +90,7 @@
         %td= status.vit
         %td= status.dex
         %td= status.mnt
-        %td{style: "#{ type_border(status) }" }= status.type_id
+        %td{style: "#{ type_border(status) }" }= status.type.name if status.type
         %td= status.fan_of_flower.name if status.fan_of_flower
         %td
           = "前列" if status.line_id == 0
