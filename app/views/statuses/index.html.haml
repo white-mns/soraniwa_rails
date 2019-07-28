@@ -43,7 +43,7 @@
         - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "MNT", params_name: "mnt_form", placeholder: "Number")
       %tr
         %td.indent
-        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "タイプ", params_name: "battle_type_form", placeholder: "BattleType", colspan: 3)
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "タイプ", params_name: "type_form", placeholder: "BattleType", colspan: 3)
       %tr
         %td.indent
         - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "推し花", params_name: "fan_of_flower_form", placeholder: "FanFlower", colspan: 3)
@@ -90,7 +90,7 @@
         %td= status.vit
         %td= status.dex
         %td= status.mnt
-        %td{style: "#{ battle_type_border(status) }" }= status.battle_type.name if status.battle_type
+        %td{style: "#{ type_border(status) }" }= status.type_id
         %td= status.fan_of_flower.name if status.fan_of_flower
         %td
           = "前列" if status.line_id == 0

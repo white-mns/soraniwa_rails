@@ -31,13 +31,12 @@ class StatusesController < ApplicationController
     params_to_form(params, @form_params, column_name: "vit", params_name: "vit_form", type: "number")
     params_to_form(params, @form_params, column_name: "dex", params_name: "dex_form", type: "number")
     params_to_form(params, @form_params, column_name: "mnt", params_name: "mnt_form", type: "number")
-    params_to_form(params, @form_params, column_name: "battle_type_id", params_name: "battle_type_id_form", type: "number")
-    params_to_form(params, @form_params, column_name: "battle_type_color_id", params_name: "battle_type_color_id_form", type: "number")
+    params_to_form(params, @form_params, column_name: "type_id", params_name: "type_id_form", type: "number")
     params_to_form(params, @form_params, column_name: "fan_of_flower_id", params_name: "fan_of_flower_id_form", type: "number")
     params_to_form(params, @form_params, column_name: "line_id", params_name: "line_id_form", type: "number")
     params_to_form(params, @form_params, column_name: "created_at", params_name: "created_at_form", type: "number")
 
-    params_to_form(params, @form_params, column_name: "battle_type_name", params_name: "battle_type_form", type: "text")
+    params_to_form(params, @form_params, column_name: "type_name", params_name: "type_form", type: "text")
     params_to_form(params, @form_params, column_name: "fan_of_flower_name", params_name: "fan_of_flower_form", type: "text")
 
     params[:q]["created_at_gteq"] = params["created_at_gteq_form"] && params["created_at_gteq_form"] != "" ? params["created_at_gteq_form"] + " 00:00:00" : nil;

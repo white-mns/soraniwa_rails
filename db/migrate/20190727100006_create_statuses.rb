@@ -8,8 +8,7 @@ class CreateStatuses < ActiveRecord::Migration[5.2]
       t.integer :vit
       t.integer :dex
       t.integer :mnt
-      t.integer :battle_type_id
-      t.integer :battle_type_color_id
+      t.integer :type_id
       t.integer :fan_of_flower_id
       t.integer :line_id
       t.integer :created_at

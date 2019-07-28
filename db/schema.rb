@@ -40,15 +40,12 @@ ActiveRecord::Schema.define(version: 2019_07_27_100018) do
     t.integer "vit"
     t.integer "dex"
     t.integer "mnt"
-    t.integer "battle_type_id"
-    t.integer "battle_type_color_id"
+    t.integer "type_id"
     t.integer "fan_of_flower_id"
     t.integer "line_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["agi"], name: "index_statuses_on_agi"
-    t.index ["battle_type_color_id"], name: "index_statuses_on_battle_type_color_id"
-    t.index ["battle_type_id"], name: "index_statuses_on_battle_type_id"
     t.index ["created_at"], name: "index_statuses_on_created_at"
     t.index ["dex"], name: "index_statuses_on_dex"
     t.index ["e_no", "created_at"], name: "createdat_and_eno"
@@ -57,6 +54,7 @@ ActiveRecord::Schema.define(version: 2019_07_27_100018) do
     t.index ["mag"], name: "index_statuses_on_mag"
     t.index ["mnt"], name: "index_statuses_on_mnt"
     t.index ["str"], name: "index_statuses_on_str"
+    t.index ["type_id"], name: "index_statuses_on_type_id"
     t.index ["vit"], name: "index_statuses_on_vit"
   end
 
