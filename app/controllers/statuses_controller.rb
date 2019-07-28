@@ -39,6 +39,10 @@ class StatusesController < ApplicationController
     params_to_form(params, @form_params, column_name: "type_name", params_name: "type_form", type: "text")
     params_to_form(params, @form_params, column_name: "fan_of_flower_name", params_name: "fan_of_flower_form", type: "text")
 
+    checkbox_params_set_query_any(params, @form_params, query_name: "line_id_eq_any",
+                             checkboxes: [{params_name: "is_front", value: 0},
+                                          {params_name: "is_back",  value: 1}])
+
     params[:q]["created_at_gteq"] = params["created_at_gteq_form"] && params["created_at_gteq_form"] != "" ? params["created_at_gteq_form"] + " 00:00:00" : nil;
     params[:q]["created_at_lteq"] = params["created_at_lteq_form"] && params["created_at_lteq_form"] != "" ? params["created_at_lteq_form"] + " 23:59:00" : nil;
 

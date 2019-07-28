@@ -64,6 +64,7 @@
       %th= sort_link(@search, :skill_id, "スキル名", default_order: :desc)
       %th.sep= sort_link(@search, :timing_id, "発動条件", default_order: :desc)
       %th= sort_link(@search, :skill_text, "説明", default_order: :desc)
+      %th.sep= sort_link(@search, :created_at, "取得日", default_order: :desc)
       %th.sep{colspan: "2"} 結果リンク
   %tbody
     - @skills.each do |skill|
@@ -74,5 +75,6 @@
         %td= skill.skill.name if skill.skill
         %td.sep= skill.timing.name if skill.timing
         %td= skill.skill.text if skill.skill
+        %td.sep= skill.created_at.to_s(:jp_date)
         %td.sep= character_link(skill.e_no)
 = paginate(@skills)
