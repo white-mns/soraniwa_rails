@@ -1,0 +1,2 @@
+class SkillDatum < ApplicationRecord
+end
