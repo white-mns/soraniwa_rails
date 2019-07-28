@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_28_015409) do
+ActiveRecord::Schema.define(version: 2019_07_28_020538) do
 
   create_table "names", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
     t.integer "e_no"
@@ -42,6 +42,24 @@ ActiveRecord::Schema.define(version: 2019_07_28_015409) do
     t.index ["cost_id"], name: "index_skill_data_on_cost_id"
     t.index ["name"], name: "index_skill_data_on_name"
     t.index ["skill_id"], name: "index_skill_data_on_skill_id"
+  end
+
+  create_table "skills", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.integer "e_no"
+    t.integer "set_no"
+    t.integer "skill_type_id"
+    t.integer "type_id"
+    t.integer "nature_id"
+    t.integer "skill_id"
+    t.string "name"
+    t.integer "timing_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["e_no", "created_at", "set_no"], name: "createdat_and_eno"
+    t.index ["nature_id"], name: "index_skills_on_nature_id"
+    t.index ["skill_type_id"], name: "index_skills_on_skill_type_id"
+    t.index ["timing_id"], name: "index_skills_on_timing_id"
+    t.index ["type_id"], name: "index_skills_on_type_id"
   end
 
   create_table "statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
