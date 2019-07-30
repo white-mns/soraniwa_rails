@@ -6,8 +6,8 @@ class SkillsController < ApplicationController
   def index
     placeholder_set
     param_set
-    @count	= Skill.notnil_date().includes(:pc_name, :type, :nature, :timing, :skill).search(params[:q]).result.hit_count()
-    @search	= Skill.notnil_date().includes(:pc_name, :type, :nature, :timing, :skill).page(params[:page]).search(params[:q])
+    @count	= Skill.notnil_date().includes(:pc_name, :type, :nature, :timing, :skill, [status: :type]).search(params[:q]).result.hit_count()
+    @search	= Skill.notnil_date().includes(:pc_name, :type, :nature, :timing, :skill, [status: :type]).page(params[:page]).search(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty?
     @skills	= @search.result.per(50)
   end
@@ -39,11 +39,23 @@ class SkillsController < ApplicationController
     params_to_form(params, @form_params, column_name: "skill_name", params_name: "skill_form", type: "text")
     params_to_form(params, @form_params, column_name: "skill_text", params_name: "skill_text_form", type: "text")
 
+    params_to_form(params, @form_params, column_name: "status_str", params_name: "str_form", type: "number")
+    params_to_form(params, @form_params, column_name: "status_mag", params_name: "mag_form", type: "number")
+    params_to_form(params, @form_params, column_name: "status_agi", params_name: "agi_form", type: "number")
+    params_to_form(params, @form_params, column_name: "status_vit", params_name: "vit_form", type: "number")
+    params_to_form(params, @form_params, column_name: "status_dex", params_name: "dex_form", type: "number")
+    params_to_form(params, @form_params, column_name: "status_mnt", params_name: "mnt_form", type: "number")
+    params_to_form(params, @form_params, column_name: "status_type_name", params_name: "status_type_form", type: "text")
+
     params[:q]["created_at_gteq"] = params["created_at_gteq_form"] && params["created_at_gteq_form"] != "" ? params["created_at_gteq_form"] + " 00:00:00" : nil;
     params[:q]["created_at_lteq"] = params["created_at_lteq_form"] && params["created_at_lteq_form"] != "" ? params["created_at_lteq_form"] + " 23:59:00" : nil;
 
     @form_params["created_at_gteq_form"] = params["created_at_gteq_form"]
     @form_params["created_at_lteq_form"] = params["created_at_lteq_form"]
+
+    toggle_params_to_variable(params, @form_params, params_name: "show_skill_text")
+    toggle_params_to_variable(params, @form_params, params_name: "show_status")
+    toggle_params_to_variable(params, @form_params, params_name: "show_status_type")
   end
   # GET /skills/1
   #def show
