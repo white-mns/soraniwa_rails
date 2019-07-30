@@ -29,19 +29,52 @@
         %td.indent
         - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "ENo", params_name: "e_no_form", placeholder: "Number")
         - td_form(f, @form_params, @placeholder, class_name: "formText", label: "キャラクター名", params_name: "pc_name_form", placeholder: "Name")
-      %tr
+      %tr.sep
         %td.indent
         - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "スキル名", params_name: "skill_form", placeholder: "Skill", colspan: 3)
       %tr
         %td.indent
         - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "タイプ", params_name: "type_form", placeholder: "Type")
         - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "発動条件", params_name: "timing_form", placeholder: "Timing")
+      %tr.sep
+        %td.indent
+        - td_date_between_form(f, @form_params, @placeholder, class_name: nil,  label: "取得日", params_name: "created_at", data_target: "date", placeholder: nil, colspan: 3)
+
+    - #==========================================================================================================================
+    - tbody_toggle(@form_params, params_name: "show_skill_text",
+                    label: {open: "スキル説明で絞り込む", close: "スキル説明で絞り込みを隠す"}, base_first: false)
+    %tbody.closed
       %tr
         %td.indent
         - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "説明", params_name: "skill_text_form", placeholder: "SkillText", colspan: 3)
+
+    - #==========================================================================================================================
+    - tbody_toggle(@form_params, params_name: "show_status",
+                    label: {open: "ステータスで絞り込む", close: "ステータスで絞り込みを隠す"}, base_first: false)
+    %tbody.closed
       %tr
         %td.indent
-        - td_date_between_form(f, @form_params, @placeholder, class_name: nil,  label: "取得日", params_name: "created_at", data_target: "date", placeholder: nil, colspan: 3)
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "STR", params_name: "str_form", placeholder: "Number")
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "MAG", params_name: "mag_form", placeholder: "Number")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "AGI", params_name: "agi_form", placeholder: "Number")
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "VIT", params_name: "vit_form", placeholder: "Number")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "DEX", params_name: "dex_form", placeholder: "Number")
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "MNT", params_name: "mnt_form", placeholder: "Number")
+
+    - #==========================================================================================================================
+    - tbody_toggle(@form_params, params_name: "show_status_type",
+                    label: {open: "キャラクターのタイプで絞り込む", close: "キャラクターのタイプで絞り込みを隠す"}, base_first: false)
+    %tbody.closed
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "タイプ", params_name: "status_type_form", placeholder: "Type", colspan: 3)
+
+    - #==========================================================================================================================
+    %tbody
       %tr.sep
         %td.indent
         %td.indent= hidden_field_tag :is_form, 1
@@ -63,7 +96,17 @@
       %th.sep= sort_link(@search, :type_id, "タイプ", default_order: :desc)
       %th= sort_link(@search, :skill_id, "スキル名", default_order: :desc)
       %th.sep= sort_link(@search, :timing_id, "発動条件", default_order: :desc)
-      %th= sort_link(@search, :skill_text, "説明", default_order: :desc)
+      - if @form_params["show_skill_text"] == "1"
+        %th= sort_link(@search, :skill_text, "説明", default_order: :desc)
+      - if @form_params["show_status"] == "1"
+        %th.sep= sort_link(@search, :str, "STR", default_order: :desc)
+        %th= sort_link(@search, :mag, "MAG", default_order: :desc)
+        %th= sort_link(@search, :agi, "AGI", default_order: :desc)
+        %th= sort_link(@search, :vit, "VIT", default_order: :desc)
+        %th= sort_link(@search, :dex, "DEX", default_order: :desc)
+        %th= sort_link(@search, :mnt, "MNT", default_order: :desc)
+      - if @form_params["show_status_type"] == "1"
+        %th.sep= sort_link(@search, :type_id, "タイプ(ステ)", default_order: :desc)
       %th.sep= sort_link(@search, :created_at, "取得日", default_order: :desc)
       %th.sep{colspan: "2"} 結果リンク
   %tbody
@@ -74,7 +117,17 @@
         %td{style: "#{ type_border(skill) }" }= skill.type.name if skill.type
         %td= skill.skill.name if skill.skill
         %td.sep= skill.timing.name if skill.timing
-        %td= skill.skill.text if skill.skill
+        - if @form_params["show_skill_text"] == "1"
+          %td= skill.skill.text if skill.skill
+        - if @form_params["show_status"] == "1"
+          %td.sep= skill.status.str if skill.status
+          %td= skill.status.mag if skill.status
+          %td= skill.status.agi if skill.status
+          %td= skill.status.vit if skill.status
+          %td= skill.status.dex if skill.status
+          %td= skill.status.mnt if skill.status
+        - if @form_params["show_status_type"] == "1"
+          %td{style: "#{ type_border(skill.status) }" }= skill.status.type.name if skill.status && skill.status.type
         %td.sep= skill.created_at.to_s(:jp_date)
         %td.sep= character_link(skill.e_no)
 = paginate(@skills)
