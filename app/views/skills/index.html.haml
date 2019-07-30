@@ -67,11 +67,11 @@
 
     - #==========================================================================================================================
     - tbody_toggle(@form_params, params_name: "show_status_type",
-                    label: {open: "キャラクターのタイプで絞り込む", close: "キャラクターのタイプで絞り込みを隠す"}, base_first: false)
+                    label: {open: "メインタイプで絞り込む", close: "メインタイプで絞り込みを隠す"}, base_first: false)
     %tbody.closed
       %tr
         %td.indent
-        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "タイプ", params_name: "status_type_form", placeholder: "Type", colspan: 3)
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "メインタイプ", params_name: "status_type_form", placeholder: "Type", colspan: 3)
 
     - #==========================================================================================================================
     %tbody
@@ -106,7 +106,7 @@
         %th= sort_link(@search, :dex, "DEX", default_order: :desc)
         %th= sort_link(@search, :mnt, "MNT", default_order: :desc)
       - if @form_params["show_status_type"] == "1"
-        %th.sep= sort_link(@search, :type_id, "タイプ(ステ)", default_order: :desc)
+        %th.sep= sort_link(@search, :type_id, "メインタイプ", default_order: :desc)
       %th.sep= sort_link(@search, :created_at, "取得日", default_order: :desc)
       %th.sep{colspan: "2"} 結果リンク
   %tbody
