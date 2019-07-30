@@ -23,6 +23,7 @@ $gray-light:                        #444;
 $sepia-light:                       #fdf6e6;
 $sepia-stripe:                      #faf0e0;
 $sepia:                             #e8d8c0;
+$sepia-dark:                        #c8b8a0;
 $sepia-border:                      #886622;
 $sepia-border-dark:                 #664400;
 
@@ -198,20 +199,20 @@ table tbody:nth-child(1) span.act_desc{
 }
 
 table tbody:nth-child(1) td{
-    background-color: $sepia-stripe;
-}
-
-table tbody:nth-child(1) td:hover{
     background-color: $sepia;
 }
 
+table tbody:nth-child(1) td:hover{
+    background-color: $sepia-dark;
+}
+
 table tbody.tbody_toggle td{
-    background-color: $sepia-stripe;
+    background-color: $sepia;
     padding-left: 2em;
 }
 
 table tbody.tbody_toggle td:hover{
-    background-color: $sepia;
+    background-color: $sepia-dark;
 }
 
 $submit-color: $sepia-border-dark;
