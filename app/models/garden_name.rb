@@ -1,0 +1,2 @@
+class GardenName < ApplicationRecord
+end
