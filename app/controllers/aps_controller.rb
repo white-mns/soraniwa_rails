@@ -41,7 +41,7 @@ class ApsController < ApplicationController
     params_to_form(params, @form_params, column_name: "created_at", params_name: "created_at_form", type: "number")
 
     params_to_form(params, @form_params, column_name: "garden_name", params_name: "garden_form", type: "text")
-    params_to_form(params, @form_params, column_name: "enemy_members_enemy_dummy", params_name: "enemy_form", type: "text")
+    params_to_form(params, @form_params, column_name: "enemy_members_enemy_name", params_name: "enemy_form", type: "text")
 
     params_to_form(@params_members, @form_params, column_name: "e_no", params_name: "party_members_e_no_form", type: "number")
     params_to_form(@params_members, @form_params, column_name: "pc_name_name", params_name: "party_members_name_form", type: "text")
@@ -50,8 +50,6 @@ class ApsController < ApplicationController
     params_to_form(@params_fellows, @form_params, column_name: "e_no", params_name: "fellow_members_e_no_form", type: "number")
     params_to_form(@params_fellows, @form_params, column_name: "pc_name_name", params_name: "fellow_members_name_form", type: "text")
     
-    detection_ap_no_from_enemy_name(params, @form_params)
-
     checkbox_params_set_query_any(params, @form_params, query_name: "action_type_eq_any",
                              checkboxes: [{params_name: "is_care", value: 0},
                                           {params_name: "is_stroll",  value: 1},
@@ -87,6 +85,8 @@ class ApsController < ApplicationController
     @form_params["base_first"]    = (!params["is_form"]) ? "1" : "0"
   end
 
+  # has_manyしたテーブルに対するAND,OR
+  #  数万件のデータに対しては重くなりすぎるため未使用
   def detection_ap_no_from_enemy_name(params, form_params)
     params_tmp = {}
     params_tmp[:q] = {}

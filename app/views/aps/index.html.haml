@@ -9,10 +9,6 @@
   .card-body
     = render "layouts/base_desc"
     %p
-      ※1　敵名でのAND検索では、「敵A 敵B」と検索すると「敵Aと敵B」が同時に出現した結果のみ表示します。
-      %br
-      「トリ ひつじ」で検索した場合は『「トリ」を含む敵』と『ひつじを含む敵』が同時に出現した結果のみ表示するため、この入力では他の文字列AND検索のように「トリひつじ」という敵だけを絞り込むことはできません。(※トリひつじは説明用の架空の敵です)
-    %p
       %span.example_select.example_toggle.pointer
         - help_icon
         入力例
