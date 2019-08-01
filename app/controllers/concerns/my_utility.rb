@@ -196,10 +196,17 @@ module MyUtility
   # has_manyで結合した要素について、NT検索で絞り込む
   def add_not_param_for_has_many(params, params_tmp, detection_arrays, dummy_param, param, record, column)
     if params[:q][dummy_param] then
-        params_tmp[:q][param] = params[:q][dummy_param]
-        nos = record.search(params_tmp[:q]).result.pluck(column)
-        detection_arrays[:not] += nos
-        params_tmp[:q].delete(param)
+        params[:q][dummy_param].each do |tmp_param|
+            params_tmp[:q][param] = tmp_param
+            nos = record.search(params_tmp[:q]).result.pluck(column).uniq
+            if detection_arrays[:not].length > 1 then 
+                detection_arrays[:not] = detection_arrays[:not] & nos
+
+            else
+                detection_arrays[:not] += nos
+            end
+            params_tmp[:q].delete(param)
+        end
     end
   end
 
