@@ -34,15 +34,12 @@ module ApplicationHelper
         file_name = sprintf("%d",e_no)
         link_to " キャラクター", "http://st.x0.to/?mode=profile&eno="+file_name+"", :target => "_blank"
     end
-    
-    def character_old_link(latest_result_no, e_no, result_no, generate_no)
-        if e_no <= 0 then return end
-        if result_no == latest_result_no then return end
+ 
+    def ap_link(ap_no)
+        if ap_no <= 0 then return end
 
-        result_no_text = sprintf("%03d", result_no)
-        generate_text  = generate_no > 0 ? "_" + sprintf("%d", generate_no) : ""
-        file_name = sprintf("%d", e_no)
-        link_to " 結果", "https://xxx.xxx/"+result_no_text+generate_text+"/"+file_name+".html", :target => "_blank"
+        file_name = sprintf("%d",ap_no)
+        link_to " 結果", "http://st.x0.to/result/"+file_name+".html", :target => "_blank"
     end
 
     def search_submit_button()

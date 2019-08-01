@@ -10,7 +10,65 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_28_020538) do
+ActiveRecord::Schema.define(version: 2019_08_01_074414) do
+
+  create_table "aps", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.integer "ap_no"
+    t.integer "action_type"
+    t.integer "garden_id"
+    t.integer "progress"
+    t.integer "party_num"
+    t.integer "enemy_num"
+    t.integer "battle_result"
+    t.integer "special_battle"
+    t.integer "is_practice"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["action_type"], name: "index_aps_on_action_type"
+    t.index ["ap_no"], name: "index_aps_on_ap_no", unique: true
+    t.index ["battle_result"], name: "index_aps_on_battle_result"
+    t.index ["created_at", "ap_no"], name: "createdat_apno"
+    t.index ["created_at"], name: "index_aps_on_created_at"
+    t.index ["enemy_num"], name: "index_aps_on_enemy_num"
+    t.index ["garden_id"], name: "index_aps_on_garden_id"
+    t.index ["is_practice"], name: "index_aps_on_is_practice"
+    t.index ["party_num"], name: "index_aps_on_party_num"
+    t.index ["progress"], name: "index_aps_on_progress"
+    t.index ["special_battle"], name: "index_aps_on_special_battle"
+  end
+
+  create_table "enemies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.integer "ap_no"
+    t.integer "enemy_id"
+    t.integer "suffix_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ap_no"], name: "index_enemies_on_ap_no"
+    t.index ["enemy_id"], name: "index_enemies_on_enemy_id"
+    t.index ["suffix_id"], name: "index_enemies_on_suffix_id"
+  end
+
+  create_table "enemy_data", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.integer "enemy_id"
+    t.string "name"
+    t.integer "line_id"
+    t.integer "type_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["enemy_id"], name: "index_enemy_data_on_enemy_id"
+    t.index ["line_id"], name: "index_enemy_data_on_line_id"
+    t.index ["name"], name: "index_enemy_data_on_name"
+    t.index ["type_id"], name: "index_enemy_data_on_type_id"
+  end
+
+  create_table "garden_names", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.integer "garden_id"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["garden_id"], name: "index_garden_names_on_garden_id"
+    t.index ["name"], name: "index_garden_names_on_name"
+  end
 
   create_table "names", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
     t.integer "e_no"
@@ -21,6 +79,16 @@ ActiveRecord::Schema.define(version: 2019_07_28_020538) do
     t.index ["e_no"], name: "index_names_on_e_no"
     t.index ["name"], name: "index_names_on_name"
     t.index ["nickname"], name: "index_names_on_nickname"
+  end
+
+  create_table "parties", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.integer "ap_no"
+    t.integer "e_no"
+    t.integer "party_order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ap_no", "e_no"], name: "apno_eno"
+    t.index ["party_order"], name: "index_parties_on_party_order"
   end
 
   create_table "proper_names", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|

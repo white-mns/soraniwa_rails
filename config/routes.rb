@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  resources :enemy_data
+  resources :enemies
+  resources :parties
+  resources :aps
+  resources :garden_names
   resources :skills
   resources :skill_data
   resources :type_names

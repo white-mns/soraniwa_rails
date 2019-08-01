@@ -1,0 +1,181 @@
+- @page_title = "結果一覧"
+%h1= @page_title
+
+.card.desc
+  .card-header
+    - act_icon(true)
+    検索仕様
+    - act_desc(true)
+  .card-body
+    = render "layouts/base_desc"
+    %p
+      %span.example_select.example_toggle.pointer
+        - help_icon
+        入力例
+        - act_desc(false)
+    #example.closed
+      = render "layouts/input_desc"
+= search_form_for @search do |f|
+  %table.search_toggle.table.table-striped.table-bordered.table-hover
+    %tbody.pointer
+      %tr
+        %td{colspan: "5"}
+          - act_icon(true)
+          絞り込み検索
+          - act_desc(true)
+    %tbody
+      %tr
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, params_name: "action_type_form",label: "結果タイプ", colspan: 3, label_td_class_name: "indent",
+          checkboxes: [{label: "花壇の世話", params_name: "is_care", class_name: "after_space mobile_br"},
+                       {label: "庭園の散策", params_name: "is_stroll", class_name: "after_space mobile_br"},
+                       {label: "島の探検", params_name: "is_exploration"}])
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "庭園番号", params_name: "garden_id_form", placeholder: "Number")
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "庭園名", params_name: "garden_form", placeholder: "Garden")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "進行度", params_name: "progress_form", placeholder: "Number", colspan: 3)
+      %tr.sep
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "参加ENo", params_name: "party_members_e_no_form", placeholder: "Number")
+        - td_form(f, @form_params, @placeholder, class_name: "formText", label: "参加キャラクター名", params_name: "party_members_name_form", placeholder: "Name")
+
+    - #==========================================================================================================================
+    - tbody_toggle(@form_params, params_name: "show_num",
+                    label: {open: "主導、同行（呼び出され）で絞り込む", close: "主導、同行（呼び出され）での絞り込みを隠す"},
+                    act_desc: "主導ENo、主導キャラクター名、同行ENo、同行キャラクター名", base_first: false)
+    %tbody.closed
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "主導ENo", params_name: "leader_e_no_form", placeholder: "Number")
+        - td_form(f, @form_params, @placeholder, class_name: "formText", label: "主導キャラクター名", params_name: "leader_name_form", placeholder: "Name")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "同行ENo", params_name: "fellow_members_e_no_form", placeholder: "Number")
+        - td_form(f, @form_params, @placeholder, class_name: "formText", label: "同行キャラクター名", params_name: "fellow_members_name_form", placeholder: "Name")
+
+
+    - #==========================================================================================================================
+    - tbody_toggle(@form_params, params_name: "show_num",
+                    label: {open: "人数を表示する", close: "人数を非表示にする"},
+                    act_desc: "パーティ人数、敵人数", base_first: false)
+    %tbody.closed
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "PT人数", params_name: "party_num_form")
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "敵数", params_name: "enemy_num_form")
+
+    - #==========================================================================================================================
+    - tbody_toggle(@form_params, params_name: "show_special",
+                    label: {open: "練習・特殊戦フラグを表示する", close: "練習・特殊戦フラグを非表示にする"}, base_first: false)
+    %tbody.closed
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, params_name: "special_battle_form", colspan: 3, label_td_class_name: "indent",
+                    checkboxes: [{label: "本番", params_name: "no_practice", class_name: "after_space mobile_br"},
+                                 {label: "練習", params_name: "is_practice"}])
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, params_name: "special_battle_form", colspan: 3, label_td_class_name: "indent",
+                    checkboxes: [{label: "通常戦・花壇の世話", params_name: "is_normal", class_name: "after_space mobile_br"},
+                                 {label: "特殊戦", params_name: "is_special"}])
+
+    - #==========================================================================================================================
+    - tbody_toggle(@form_params, params_name: "show_ap_no",
+                    label: {open: "結果Noで絞り込む", close: "結果Noで絞り込みを隠す"}, base_first: false)
+    %tbody.closed
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "結果No", params_name: "ap_no_form", colspan: 3)
+
+    - #==========================================================================================================================
+    - tbody_toggle(@form_params, params_name: "show_date",
+                    label: {open: "日付を表示する", close: "日付を表示する"}, base_first: true)
+    %tbody
+      %tr.sep
+        %td.indent
+        - td_date_between_form(f, @form_params, @placeholder, class_name: nil,  label: "日時", params_name: "created_at", data_target: "date", placeholder: nil, colspan: 3)
+
+    - #==========================================================================================================================
+    - tbody_toggle(@form_params, params_name: "show_battle_result",
+                    label: {open: "勝敗を表示する", close: "勝敗を非表示にする"}, base_first: false)
+    %tbody.closed
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, params_name: "battle_result_form",label: "勝敗", colspan: 3, label_td_class_name: "indent",
+          checkboxes: [{label: "なし", params_name: "no_win", class_name: "after_space"},
+                       {label: "勝利", params_name: "is_win", class_name: "after_space"},
+                       {label: "引分", params_name: "is_draw", class_name: "after_space"},
+                       {label: "敗北", params_name: "is_lose"}])
+
+    - #==========================================================================================================================
+    - tbody_toggle(@form_params, params_name: "show_enemy",
+                    label: {open: "敵名を表示する", close: "敵名を非表示にする"}, base_first: false)
+    %tbody.closed
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "敵名", params_name: "enemy_form", placeholder: "Enemy", colspan: 3)
+    %tbody
+      %tr.sep
+        %td.indent
+        %td.indent= hidden_field_tag :is_form, 1
+        %td{colspan: "3"}
+          - search_submit_button
+
+
+= paginate(@aps)
+%br
+ヒット数：#{ @count }件
+%br
+%br
+
+%table.table.table-striped.table-bordered.table-hover
+  %thead
+    %tr
+      %th= sort_link(@search, :ap_no, "結果No", default_order: :desc)
+      %th.sep= sort_link(@search, :action_type, "種類", default_order: :desc)
+      %th.sep= sort_link(@search, :party_members_e_no,'参戦キャラクター(ENo)', default_order: :desc)
+      %th.sep= sort_link(@search, :garden_id, "庭園", default_order: :desc)
+      %th= sort_link(@search, :garden_id, "イベント名", default_order: :desc)
+      %th= sort_link(@search, :progress, "進行度", default_order: :desc)
+      - if @form_params["show_num"] == "1"
+        %th.sep= sort_link(@search, :party_num, "PT人数", default_order: :desc)
+        %th= sort_link(@search, :enemy_num, "敵数", default_order: :desc)
+      - if @form_params["show_special"] == "1"
+        %th.sep= sort_link(@search, :is_practice, "練習", default_order: :desc)
+        %th.sep= sort_link(@search, :special_battle, "特殊戦", default_order: :desc)
+      %th.sep= sort_link(@search, :created_at, "日時", default_order: :desc)
+      - if @form_params["show_battle_result"] == "1"
+        %th.sep= sort_link(@search, :battle_result, "結果", default_order: :desc)
+      - if @form_params["show_enemy"] == "1"
+        %th.sep= sort_link(@search, :enemy_members_enemy_id,'敵一覧', default_order: :desc)
+      %th.sep{colspan: "2"} 結果リンク
+  %tbody
+    - @aps.each do |ap|
+      %tr
+        %td= ap.ap_no
+        %td.sep= action_type_text(ap)
+        %td.sep
+          - party_members(ap.party_members) if ap.party_members
+        %td.sep= ap.garden_id if ap.garden_id < 9999
+        %td
+          = ap.garden.name if ap.garden
+          = "(練習)" if ap.is_practice == 1
+        %td= progress_text(ap)
+        - if @form_params["show_num"] == "1"
+          %td.sep= ap.party_num
+          %td= ap.enemy_num if ap.enemy_num > 0
+        - if @form_params["show_special"] == "1"
+          %td.sep= flag_text(ap.is_practice)
+          %td.sep= flag_text(ap.special_battle)
+        %td.sep= ap.created_at.to_s(:jp_date)
+        - if @form_params["show_battle_result"] == "1"
+          %td.sep= battle_result_text(ap)
+        - if @form_params["show_enemy"] == "1"
+          %td.sep
+            - enemy_members(ap.enemy_members) if ap.enemy_members
+        %td.sep= ap_link(ap.ap_no)
+= paginate(@aps)
