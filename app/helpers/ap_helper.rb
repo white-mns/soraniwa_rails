@@ -2,7 +2,7 @@ module ApHelper
     def action_type_text(ap)
         if    ap.action_type == 0 then return "花壇の世話"
         elsif ap.action_type == 1 then return "庭園の散策"
-        elsif ap.action_type == 2 then return "嶋の探検"
+        elsif ap.action_type == 2 then return "島の探検"
         end
     end
 
