@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :aps
   resources :garden_names
   resources :skills
   resources :skill_data

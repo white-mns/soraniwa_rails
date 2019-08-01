@@ -10,7 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_31_152148) do
+ActiveRecord::Schema.define(version: 2019_08_01_060041) do
+
+  create_table "aps", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.integer "ap_no"
+    t.integer "action_type"
+    t.integer "garden_id"
+    t.integer "progress"
+    t.integer "party_num"
+    t.integer "enemy_num"
+    t.integer "battle_result"
+    t.integer "special_battle"
+    t.integer "is_practice"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["action_type"], name: "index_aps_on_action_type"
+    t.index ["ap_no"], name: "index_aps_on_ap_no", unique: true
+    t.index ["battle_result"], name: "index_aps_on_battle_result"
+    t.index ["created_at", "ap_no"], name: "createdat_apno"
+    t.index ["created_at"], name: "index_aps_on_created_at"
+    t.index ["enemy_num"], name: "index_aps_on_enemy_num"
+    t.index ["garden_id"], name: "index_aps_on_garden_id"
+    t.index ["is_practice"], name: "index_aps_on_is_practice"
+    t.index ["party_num"], name: "index_aps_on_party_num"
+    t.index ["progress"], name: "index_aps_on_progress"
+    t.index ["special_battle"], name: "index_aps_on_special_battle"
+  end
 
   create_table "garden_names", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
     t.integer "garden_id"
