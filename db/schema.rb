@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_01_062834) do
+ActiveRecord::Schema.define(version: 2019_08_01_070537) do
 
   create_table "aps", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
     t.integer "ap_no"
@@ -35,6 +35,17 @@ ActiveRecord::Schema.define(version: 2019_08_01_062834) do
     t.index ["party_num"], name: "index_aps_on_party_num"
     t.index ["progress"], name: "index_aps_on_progress"
     t.index ["special_battle"], name: "index_aps_on_special_battle"
+  end
+
+  create_table "enemies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.integer "ap_no"
+    t.integer "enemy_id"
+    t.integer "suffix_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ap_no"], name: "index_enemies_on_ap_no"
+    t.index ["enemy_id"], name: "index_enemies_on_enemy_id"
+    t.index ["suffix_id"], name: "index_enemies_on_suffix_id"
   end
 
   create_table "garden_names", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|

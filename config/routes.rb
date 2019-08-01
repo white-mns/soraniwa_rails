@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :enemies
   resources :parties
   resources :aps
   resources :garden_names
