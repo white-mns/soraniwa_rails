@@ -1,4 +1,4 @@
-- @page_title = "出現敵一覧"
+- @page_title = "敵情報一覧"
 %h1= @page_title
 
 .card.desc
@@ -27,11 +27,11 @@
       %tr
       %tr
         %td.indent
-        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "結果No", params_name: "ap_no_form", placeholder: "Number")
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "ID", params_name: "enemy_id_form", placeholder: "Number")
       %tr
         %td.indent
-        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "敵名", params_name: "enemy_form", placeholder: "Enemy")
-      %tr.sep
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "敵名", params_name: "name_form", placeholder: "Enemy")
+      %tr
         %td.indent
         - td_form(f, @form_params, @placeholder, params_name: "equip_form",label: "隊列", colspan: 3, label_td_class_name: "indent",
                     checkboxes: [{label: "前列", params_name: "is_front", class_name: "after_space mobile_br"},
@@ -46,7 +46,7 @@
           - search_submit_button
 
 
-= paginate(@enemies)
+= paginate(@enemy_data)
 %br
 ヒット数：#{ @count }件
 %br
@@ -55,21 +55,16 @@
 %table.table.table-striped.table-bordered.table-hover
   %thead
     %tr
-      %th= sort_link(@search, :ap_no, "結果No", default_order: :desc)
-      %th= sort_link(@search, :enemy_id, "敵", default_order: :desc)
-      %th= sort_link(@search, :enemy_line_id, "隊列", default_order: :desc)
-      %th= sort_link(@search, :enemy_type_id, "タイプ", default_order: :desc)
-      %th.sep{colspan: "2"} 結果リンク
-  %tbody
-    - @enemies.each do |enemy|
+      %th= sort_link(@search, :enemy_id, "ID", default_order: :desc)
+      %th= sort_link(@search, :name, "敵名", default_order: :desc)
+      %th= sort_link(@search, :line_id, "隊列", default_order: :desc)
+      %th= sort_link(@search, :type_id, "タイプ", default_order: :desc)
+    - @enemy_data.each do |enemy_datum|
       %tr
-        %td= enemy.ap_no
+        %td= enemy_datum.enemy_id
+        %td= enemy_datum.name
         %td
-          = enemy.enemy.name if enemy.enemy
-          = enemy.suffix.name if enemy.suffix
-        %td
-          = "前列" if enemy.enemy.line_id == 0
-          = "後列" if enemy.enemy.line_id == 1
-        %td{style: "#{ type_border(enemy.enemy) }" }= enemy.enemy.type.name if enemy.enemy.type
-        %td.sep= ap_link(enemy.ap_no)
-= paginate(@enemies)
+          = "前列" if enemy_datum.line_id == 0
+          = "後列" if enemy_datum.line_id == 1
+        %td{style: "#{ type_border(enemy_datum) }" }= enemy_datum.type.name if enemy_datum.type
+= paginate(@enemy_data)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_01_070537) do
+ActiveRecord::Schema.define(version: 2019_08_01_074414) do
 
   create_table "aps", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
     t.integer "ap_no"
@@ -46,6 +46,19 @@ ActiveRecord::Schema.define(version: 2019_08_01_070537) do
     t.index ["ap_no"], name: "index_enemies_on_ap_no"
     t.index ["enemy_id"], name: "index_enemies_on_enemy_id"
     t.index ["suffix_id"], name: "index_enemies_on_suffix_id"
+  end
+
+  create_table "enemy_data", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.integer "enemy_id"
+    t.string "name"
+    t.integer "line_id"
+    t.integer "type_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["enemy_id"], name: "index_enemy_data_on_enemy_id"
+    t.index ["line_id"], name: "index_enemy_data_on_line_id"
+    t.index ["name"], name: "index_enemy_data_on_name"
+    t.index ["type_id"], name: "index_enemy_data_on_type_id"
   end
 
   create_table "garden_names", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|

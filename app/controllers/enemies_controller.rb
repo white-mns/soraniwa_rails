@@ -6,8 +6,8 @@ class EnemiesController < ApplicationController
   def index
     placeholder_set
     param_set
-    @count	= Enemy.notnil_date().includes(:enemy, :suffix).search(params[:q]).result.hit_count()
-    @search	= Enemy.notnil_date().includes(:enemy, :suffix).page(params[:page]).search(params[:q])
+    @count	= Enemy.notnil_date().includes([enemy: :type], :suffix).search(params[:q]).result.hit_count()
+    @search	= Enemy.notnil_date().includes([enemy: :type], :suffix).page(params[:page]).search(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty?
     @enemies	= @search.result.per(50)
   end
@@ -28,6 +28,11 @@ class EnemiesController < ApplicationController
     params_to_form(params, @form_params, column_name: "suffix_id", params_name: "suffix_id_form", type: "number")
 
     params_to_form(params, @form_params, column_name: "enemy_name", params_name: "enemy_form", type: "text")
+    params_to_form(params, @form_params, column_name: "enemy_type_name", params_name: "type_form", type: "text")
+
+    checkbox_params_set_query_any(params, @form_params, query_name: "enemy_line_id_eq_any",
+                             checkboxes: [{params_name: "is_front", value: 0},
+                                          {params_name: "is_back",  value: 1}])
   end
   # GET /enemies/1
   #def show

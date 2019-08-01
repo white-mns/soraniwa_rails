@@ -12,5 +12,6 @@ class ApplicationController < ActionController::Base
         @placeholder["Timing"]   = "例）常時/4行動毎"
         @placeholder["Item"]   = "例）武器/\"防具\""
         @placeholder["Garden"]   = "例）はじまりの場所/おだやかな草原"
+        @placeholder["Enemy"]   = "例）ひつじ/ニワニワトリ"
     end
 end
