@@ -38,9 +38,14 @@ module ApHelper
         end
 
         members.each do |member|
-          haml_concat member.pc_name.name if member.pc_name
-          haml_concat "(" + sprintf("%d", member.e_no) + ")"
-          haml_tag :br
+          if member.e_no == 10001 then
+            haml_concat "ひつじ"
+            haml_tag :br
+          else
+            haml_concat member.pc_name.name if member.pc_name
+            haml_concat "(" + sprintf("%d", member.e_no) + ")"
+            haml_tag :br
+          end
         end
     end
 
