@@ -53,7 +53,8 @@ class ApsController < ApplicationController
     checkbox_params_set_query_any(params, @form_params, query_name: "action_type_eq_any",
                              checkboxes: [{params_name: "is_care", value: 0},
                                           {params_name: "is_stroll",  value: 1},
-                                          {params_name: "is_exploration",  value: 2}])
+                                          {params_name: "is_exploration",  value: 2},
+                                          {params_name: "is_match",  value: 3}])
 
     checkbox_params_set_query_any(params, @form_params, query_name: "special_battle_eq_any",
                              checkboxes: [{params_name: "no_special", value: 0},
