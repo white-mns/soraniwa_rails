@@ -28,9 +28,10 @@
       %tr
         %td.indent
         - td_form(f, @form_params, @placeholder, params_name: "action_type_form",label: "結果タイプ", colspan: 3, label_td_class_name: "indent",
-          checkboxes: [{label: "花壇の世話", params_name: "is_care", class_name: "after_space mobile_br"},
+          checkboxes: [{label: "花壇の世話", params_name: "is_care", class_name: "after_space"},
                        {label: "庭園の散策", params_name: "is_stroll", class_name: "after_space mobile_br"},
-                       {label: "島の探検", params_name: "is_exploration"}])
+                       {label: "島の探検", params_name: "is_exploration", class_name: "after_space"},
+                       {label: "練習戦", params_name: "is_match"}])
       %tr
         %td.indent
         - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "庭園番号", params_name: "garden_id_form", placeholder: "Number")
@@ -70,13 +71,13 @@
 
     - #==========================================================================================================================
     - tbody_toggle(@form_params, params_name: "show_special",
-                    label: {open: "練習・特殊戦フラグを表示する", close: "練習・特殊戦フラグを非表示にする"}, base_first: false)
+                    label: {open: "PPでの練習・特殊戦フラグを表示する", close: "PPでの練習・特殊戦フラグを非表示にする"}, base_first: false)
     %tbody.closed
       %tr
         %td.indent
         - td_form(f, @form_params, @placeholder, params_name: "special_battle_form", colspan: 3, label_td_class_name: "indent",
                     checkboxes: [{label: "本番", params_name: "no_practice", class_name: "after_space mobile_br"},
-                                 {label: "練習", params_name: "is_practice"}])
+                                 {label: "PP練習", params_name: "is_practice"}])
       %tr
         %td.indent
         - td_form(f, @form_params, @placeholder, params_name: "special_battle_form", colspan: 3, label_td_class_name: "indent",
