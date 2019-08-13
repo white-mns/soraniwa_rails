@@ -32,21 +32,27 @@
       %tr.sep
         %td.indent
         - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "スキル名", params_name: "skill_form", placeholder: "Skill", colspan: 3)
-      %tr
+      %tr.sep
         %td.indent
         - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "タイプ", params_name: "type_form", placeholder: "Type")
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "性質", params_name: "nature_form", placeholder: "Nature")
+      %tr
+        %td.indent
         - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "発動条件", params_name: "timing_form", placeholder: "Timing")
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "発動数", params_name: "use_number_form")
       %tr.sep
         %td.indent
         - td_date_between_form(f, @form_params, @placeholder, class_name: nil,  label: "取得日", params_name: "created_at", data_target: "date", placeholder: nil, colspan: 3)
 
     - #==========================================================================================================================
     - tbody_toggle(@form_params, params_name: "show_skill_text",
-                    label: {open: "スキル説明を表示する", close: "スキル説明を表示しない"}, base_first: false)
+                    label: {open: "スキル詳細を表示する", close: "スキル詳細を表示しない"},
+                    act_desc: "消費コスト、説明", base_first: false)
     %tbody.closed
       %tr
         %td.indent
-        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "説明", params_name: "skill_text_form", placeholder: "SkillText", colspan: 3)
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "消費コスト", params_name: "cost_form", placeholder: "Cost")
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "説明", params_name: "skill_text_form", placeholder: "SkillText")
 
     - #==========================================================================================================================
     - tbody_toggle(@form_params, params_name: "show_status",
@@ -94,9 +100,12 @@
       %th= sort_link(@search, :e_no,"キャラクター(ENo)", default_order: :desc)
       %th.sep= sort_link(@search, :set_no, "No", default_order: :desc)
       %th.sep= sort_link(@search, :type_id, "タイプ", default_order: :desc)
+      %th= sort_link(@search, :nature_id, "性質", default_order: :desc)
       %th= sort_link(@search, :skill_id, "スキル名", default_order: :desc)
       %th.sep= sort_link(@search, :timing_id, "発動条件", default_order: :desc)
+      %th= sort_link(@search, :use_number, "発動数", default_order: :desc)
       - if @form_params["show_skill_text"] == "1"
+        %th.sep= sort_link(@search, :skill_cost_id, "コスト", default_order: :desc)
         %th= sort_link(@search, :skill_text, "説明", default_order: :desc)
       - if @form_params["show_status"] == "1"
         %th.sep= sort_link(@search, :str, "STR", default_order: :desc)
@@ -115,9 +124,14 @@
         %td= pc_name_text(skill.e_no, skill.pc_name)
         %td.sep= skill.set_no
         %td{style: "#{ type_border(skill) }" }= skill.type.name if skill.type
+        %td= skill.nature.name if skill.nature
         %td= skill.skill.name if skill.skill
         %td.sep= skill.timing.name if skill.timing
+        %td
+          = skill.use_number if skill.use_number < 9999
+          = "∞" if skill.use_number == 9999
         - if @form_params["show_skill_text"] == "1"
+          %td.sep= skill.skill.cost.name if skill.skill && skill.skill.cost
           %td= skill.skill.text if skill.skill
         - if @form_params["show_status"] == "1"
           %td.sep= skill.status.str if skill.status
