@@ -6,8 +6,8 @@ class SkillsController < ApplicationController
   def index
     placeholder_set
     param_set
-    @count	= Skill.notnil_date().includes(:pc_name, :type, :nature, :timing, :skill, [status: :type]).search(params[:q]).result.hit_count()
-    @search	= Skill.notnil_date().includes(:pc_name, :type, :nature, :timing, :skill, [status: :type]).page(params[:page]).search(params[:q])
+    @count	= Skill.notnil_date().includes(:pc_name, :type, :nature, :timing, [skill: :cost], [status: :type]).search(params[:q]).result.hit_count()
+    @search	= Skill.notnil_date().includes(:pc_name, :type, :nature, :timing, [skill: :cost], [status: :type]).page(params[:page]).search(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty?
     @skills	= @search.result.per(50)
   end
@@ -36,7 +36,9 @@ class SkillsController < ApplicationController
     params_to_form(params, @form_params, column_name: "type_name", params_name: "type_form", type: "text")
     params_to_form(params, @form_params, column_name: "nature_name", params_name: "nature_form", type: "text")
     params_to_form(params, @form_params, column_name: "timing_name", params_name: "timing_form", type: "text")
+    params_to_form(params, @form_params, column_name: "use_number", params_name: "use_number_form", type: "number")
     params_to_form(params, @form_params, column_name: "skill_name", params_name: "skill_form", type: "text")
+    params_to_form(params, @form_params, column_name: "skill_cost_name", params_name: "cost_form", type: "text")
     params_to_form(params, @form_params, column_name: "skill_text", params_name: "skill_text_form", type: "text")
 
     params_to_form(params, @form_params, column_name: "status_str", params_name: "str_form", type: "number")

@@ -13,5 +13,6 @@ class ApplicationController < ActionController::Base
         @placeholder["Item"]   = "例）武器/\"防具\""
         @placeholder["Garden"]   = "例）はじまりの場所/おだやかな草原"
         @placeholder["Enemy"]   = "例）ひつじ/ニワニワトリ"
+        @placeholder["Nature"]   = "例）強撃/軽量/回復"
     end
 end

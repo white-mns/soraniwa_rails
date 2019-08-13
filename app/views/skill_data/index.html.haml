@@ -33,7 +33,7 @@
         - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "スキル名", params_name: "name_form", placeholder: "Skill")
       %tr
         %td.indent
-        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "使用コスト", params_name: "cost_id_form", placeholder: "Cost")
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "消費コスト", params_name: "cost_id_form", placeholder: "Cost")
       %tr
         %td.indent
         - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "説明", params_name: "text_form", placeholder: "SkillText")
@@ -55,13 +55,13 @@
     %tr
       %th= sort_link(@search, :skill_id, "ID", default_order: :desc)
       %th= sort_link(@search, :name, "スキル名", default_order: :desc)
-      %th= sort_link(@search, :cost_id, "使用コスト", default_order: :desc)
+      %th= sort_link(@search, :cost_id, "消費コスト", default_order: :desc)
       %th= sort_link(@search, :text, "説明", default_order: :desc)
   %tbody
     - @skill_data.each do |skill_datum|
       %tr
         %td= skill_datum.skill_id
         %td= skill_datum.name
-        %td= skill_datum.cost_id
+        %td= skill_datum.cost.name if skill_datum.cost
         %td= skill_datum.text
 = paginate(@skill_data)

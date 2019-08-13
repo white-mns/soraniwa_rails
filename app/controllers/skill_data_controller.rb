@@ -6,8 +6,8 @@ class SkillDataController < ApplicationController
   def index
     placeholder_set
     param_set
-    @count	= SkillDatum.search(params[:q]).result.hit_count()
-    @search	= SkillDatum.page(params[:page]).search(params[:q])
+    @count	= SkillDatum.includes(:cost).search(params[:q]).result.hit_count()
+    @search	= SkillDatum.includes(:cost).page(params[:page]).search(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty?
     @skill_data	= @search.result.per(50)
   end

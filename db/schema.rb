@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_01_074414) do
+ActiveRecord::Schema.define(version: 2019_08_12_223544) do
 
   create_table "aps", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
     t.integer "ap_no"
@@ -123,11 +123,13 @@ ActiveRecord::Schema.define(version: 2019_08_01_074414) do
     t.integer "timing_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "use_number"
     t.index ["e_no", "created_at", "set_no"], name: "createdat_and_eno"
     t.index ["nature_id"], name: "index_skills_on_nature_id"
     t.index ["skill_type_id"], name: "index_skills_on_skill_type_id"
     t.index ["timing_id"], name: "index_skills_on_timing_id"
     t.index ["type_id"], name: "index_skills_on_type_id"
+    t.index ["use_number"], name: "index_skills_on_use_number"
   end
 
   create_table "statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
