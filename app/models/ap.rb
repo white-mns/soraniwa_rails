@@ -11,6 +11,7 @@ class Ap < ApplicationRecord
             where(ap_no: query)
         end
     }
+
     scope :where_leader, -> (params) {
         if params["leader_e_no_form"] || params["leader_name_form"] then
             query = Party.includes(:pc_name).search(params[:q]).result.select(:ap_no)
