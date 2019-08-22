@@ -1,0 +1,67 @@
+- @page_title = "新出設定スキル一覧"
+%h1= @page_title
+
+.card.desc
+  .card-header
+    - act_icon(true)
+    検索仕様
+    - act_desc(true)
+  .card-body
+    = render "layouts/base_desc"
+    %p
+      %span.example_select.example_toggle.pointer
+        - help_icon
+        入力例
+        - act_desc(false)
+    #example.closed
+      = render "layouts/input_desc"
+= search_form_for @search do |f|
+  %table.search_toggle.table.table-striped.table-bordered.table-hover
+    %tbody.pointer
+      %tr
+        %td{colspan: "5"}
+          - act_icon(true)
+          絞り込み検索
+          - act_desc(true)
+    %tbody
+      %tr
+      %tr.sep
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "スキル名", params_name: "skill_form", placeholder: "Skill", colspan: 3)
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "消費コスト", params_name: "cost_form", placeholder: "Cost")
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "説明", params_name: "skill_text_form", placeholder: "SkillText")
+      %tr.sep
+        %td.indent
+        - td_date_between_form(f, @form_params, @placeholder, class_name: nil,  label: "新出日付", params_name: "created_at", data_target: "date", placeholder: nil, colspan: 3)
+      %tr.sep
+        %td.indent
+        %td.indent= hidden_field_tag :is_form, 1
+        %td{colspan: "3"}
+          - search_submit_button
+
+
+= paginate(@new_skills)
+%br
+ヒット数：#{ @count }件
+%br
+%br
+
+%table.table.table-striped.table-bordered.table-hover
+  %thead
+    %tr
+      %th= sort_link(@search, :skill_id, "スキル名", default_order: :desc)
+      %th.sep= sort_link(@search, :skill_cost_id, "コスト", default_order: :desc)
+      %th= sort_link(@search, :skill_text, "説明", default_order: :desc)
+      %th.sep= sort_link(@search, :created_at, "新出日付", default_order: :desc)
+  %tbody
+    - @new_skills.each do |new_skill|
+      %tr
+        %td
+          - if new_skill.skill
+            = link_to new_skill.skill.name, skills_path + "?skill_form=\"" + new_skill.skill.name + "\""
+        %td.sep= new_skill.skill.cost.name if new_skill.skill && new_skill.skill.cost
+        %td= new_skill.skill.text if new_skill.skill
+        %td.sep= new_skill.created_at.to_s(:jp_date)
+= paginate(@new_skills)
