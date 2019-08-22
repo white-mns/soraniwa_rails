@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_21_041344) do
+ActiveRecord::Schema.define(version: 2019_08_22_062543) do
 
   create_table "aps", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
     t.integer "ap_no"
@@ -88,6 +88,15 @@ ActiveRecord::Schema.define(version: 2019_08_21_041344) do
     t.index ["e_no"], name: "index_names_on_e_no"
     t.index ["name"], name: "index_names_on_name"
     t.index ["nickname"], name: "index_names_on_nickname"
+  end
+
+  create_table "new_drops", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.integer "ap_no"
+    t.integer "drop_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ap_no"], name: "index_new_drops_on_ap_no"
+    t.index ["drop_id"], name: "index_new_drops_on_drop_id"
   end
 
   create_table "parties", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|

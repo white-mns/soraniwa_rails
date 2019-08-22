@@ -35,6 +35,12 @@
               .dropdown-menu
                 = link_to "結果一覧", aps_path, class: "dropdown-item"
                 = link_to "獲得アイテム一覧", drops_path, class: "dropdown-item"
+            %li.nav-item.dropdown
+              %a.nav-link.dropdown-toggle#themes{ :data => {:toggle =>"dropdown"}, :href => "#"}
+                新出データ
+                %span.caret
+              .dropdown-menu
+                = link_to "新出獲得アイテム一覧", new_drops_path, class: "dropdown-item"
     .container
       .row
         .col-md-12

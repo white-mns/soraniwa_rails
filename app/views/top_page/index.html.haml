@@ -22,6 +22,12 @@
           %ul  
             %li= link_to "結果一覧", aps_path
             %li= link_to "獲得アイテム一覧", drops_path
+    .row
+      .col-md-6
+        %ul
+          %li 新出データ
+          %ul  
+            %li= link_to "新出獲得アイテム一覧", new_drops_path
 
 .card.top
   .card-body
@@ -31,6 +37,8 @@
       %ul
         %li
           = link_to "獲得アイテム一覧", drops_path
+          、
+          = link_to "新出獲得アイテム一覧", new_drops_path
           を公開
       %li 2019/8/13
       %ul
