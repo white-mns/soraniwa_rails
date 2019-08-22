@@ -8,7 +8,7 @@ class NewSkillsController < ApplicationController
     param_set
     @count	= NewSkill.notnil_date().includes(:skill).search(params[:q]).result.hit_count()
     @search	= NewSkill.notnil_date().includes(:skill).page(params[:page]).search(params[:q])
-    @search.sorts = "id asc" if @search.sorts.empty?
+    @search.sorts = "created_at desc" if @search.sorts.empty?
     @new_skills	= @search.result.per(50)
   end
 

@@ -8,7 +8,7 @@ class NewDropsController < ApplicationController
     param_set
     @count	= NewDrop.notnil_date().includes(:drop, :ap).search(params[:q]).result.hit_count()
     @search	= NewDrop.notnil_date().includes(:drop, :ap).page(params[:page]).search(params[:q])
-    @search.sorts = "id asc" if @search.sorts.empty?
+    @search.sorts = "ap_created_at desc" if @search.sorts.empty?
     @new_drops	= @search.result.per(50)
   end
 
