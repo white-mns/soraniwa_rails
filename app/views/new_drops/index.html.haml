@@ -30,7 +30,7 @@
           - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "獲得アイテム", params_name: "drop_form", placeholder: "Item", colspan: 3)
       %tr.sep
         %td.indent
-        - td_date_between_form(f, @form_params, @placeholder, class_name: nil,  label: "日時", params_name: "created_at", data_target: "date", placeholder: nil, colspan: 3)
+        - td_date_between_form(f, @form_params, @placeholder, class_name: nil,  label: "新出日付", params_name: "created_at", data_target: "date", placeholder: nil, colspan: 3)
       %tr.sep
         %td.indent
         %td.indent= hidden_field_tag :is_form, 1
@@ -47,13 +47,11 @@
 %table.table.table-striped.table-bordered.table-hover
   %thead
     %tr
-      %th= sort_link(@search, :ap_no, "結果No", default_order: :desc)
       %th= sort_link(@search, :drop_id, "獲得アイテム名", default_order: :desc)
-      %th.sep= sort_link(@search, :ap_created_at, "新出日時", default_order: :desc)
+      %th.sep= sort_link(@search, :ap_created_at, "新出日付", default_order: :desc)
   %tbody
     - @new_drops.each do |new_drop|
       %tr
-        %td= new_drop.ap_no
         %td
           - if new_drop.drop
             = link_to new_drop.drop.name, drops_path + "?drop_form=\"" + new_drop.drop.name + "\""

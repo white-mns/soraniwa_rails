@@ -54,7 +54,7 @@
     %tbody
       %tr.sep
         %td.indent
-        - td_date_between_form(f, @form_params, @placeholder, class_name: nil,  label: "日時", params_name: "created_at", data_target: "date", placeholder: nil, colspan: 3)
+        - td_date_between_form(f, @form_params, @placeholder, class_name: nil,  label: "日付", params_name: "created_at", data_target: "date", placeholder: nil, colspan: 3)
 
     - #==========================================================================================================================
     %tbody
@@ -80,7 +80,7 @@
       %th= sort_link(@search, :ap_garden_id, "イベント名", default_order: :desc)
       %th= sort_link(@search, :ap_progress, "進行度", default_order: :desc)
       %th.sep= sort_link(@search, :drop_id, "獲得アイテム", default_order: :desc)
-      %th.sep= sort_link(@search, :ap_created_at, "日時", default_order: :desc)
+      %th.sep= sort_link(@search, :ap_created_at, "日付", default_order: :desc)
       %th.sep{colspan: "2"} 結果リンク
   %tbody
     - @drops.each do |drop|
