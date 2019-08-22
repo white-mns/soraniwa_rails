@@ -11,8 +11,8 @@ class <%= controller_class_name %>Controller < ApplicationController
   def index
     placeholder_set
     param_set
-    @count	= <%= class_name %>.notnil().includes(:pc_name).search(params[:q]).result.hit_count()
-    @search	= <%= class_name %>.notnil().includes(:pc_name).page(params[:page]).search(params[:q])
+    @count	= <%= class_name %>.notnil_date().includes(:pc_name).search(params[:q]).result.hit_count()
+    @search	= <%= class_name %>.notnil_date().includes(:pc_name).page(params[:page]).search(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty?
     @<%= plural_table_name %>	= @search.result.per(50)
   end
@@ -20,11 +20,11 @@ class <%= controller_class_name %>Controller < ApplicationController
   def param_set
     @form_params = {}
 
-    @latest_result = Name.maximum("result_no")
+    @latest_created = UploadedCheck.maximum("created_at")
 
     params_clean(params)
     if !params["is_form"] then
-        params["result_no_form"] ||= sprintf("%d",@latest_result)
+        params["created_at_lteq_form"] ||= @latest_created.to_date.to_s
     end
 
     params_to_form(params, @form_params, column_name: "pc_name_name", params_name: "pc_name_form", type: "text")

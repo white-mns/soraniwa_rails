@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :new_skills
+  resources :new_drops
+  resources :drops
   resources :enemy_data
   resources :enemies
   resources :parties

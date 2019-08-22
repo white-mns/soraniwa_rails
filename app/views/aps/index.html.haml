@@ -98,7 +98,7 @@
     %tbody
       %tr.sep
         %td.indent
-        - td_date_between_form(f, @form_params, @placeholder, class_name: nil,  label: "日時", params_name: "created_at", data_target: "date", placeholder: nil, colspan: 3)
+        - td_date_between_form(f, @form_params, @placeholder, class_name: nil,  label: "日付", params_name: "created_at", data_target: "date", placeholder: nil, colspan: 3)
 
     - #==========================================================================================================================
     - tbody_toggle(@form_params, params_name: "show_battle_result",
@@ -148,7 +148,7 @@
       - if @form_params["show_special"] == "1"
         %th.sep= sort_link(@search, :is_practice, "練習", default_order: :desc)
         %th.sep= sort_link(@search, :special_battle, "特殊戦", default_order: :desc)
-      %th.sep= sort_link(@search, :created_at, "日時", default_order: :desc)
+      %th.sep= sort_link(@search, :created_at, "日付", default_order: :desc)
       - if @form_params["show_battle_result"] == "1"
         %th.sep= sort_link(@search, :battle_result, "結果", default_order: :desc)
       - if @form_params["show_enemy"] == "1"
