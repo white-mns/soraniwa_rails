@@ -9,12 +9,24 @@
   .card-body
     = render "layouts/base_desc"
     %p
+      ※参戦Eno、参戦キャラクター名、呼び出しEno、呼び出しキャラクター名、同行ENo、同行キャラクター名は、一つの検索枠だけではOR検索しかできません。別々の検索枠に入力した場合はAND検索となり、キャラ同士の組み合わせで検索できます。具体的には入力例を御覧ください。
+    %p
       %span.example_select.example_toggle.pointer
         - help_icon
         入力例
         - act_desc(false)
     #example.closed
       = render "layouts/input_desc"
+      %p
+        Eno、キャラクター名での検索について、
+        %br
+        参戦キャラクター名に「ハナコ ひつじ」……何もヒットしません
+        %br
+        参戦キャラクター名に「ハナコ/ひつじ」……ハナコかひつじが参戦している結果がヒットします
+        %br
+        主導キャラクター名に「ハナコ」、同行キャタクター名に「ひつじ」……ハナコがひつじを呼び出している結果がヒットします
+        %br
+        主導キャラクター名に「ハナコ」、同行キャタクター名に「ひつじ」、参戦Enoに「1」……ハナコが、ひつじとEno.1のキャラクターを呼び出している結果がヒットします
 = search_form_for @search do |f|
   %table.search_toggle.table.table-striped.table-bordered.table-hover
     %tbody.pointer
