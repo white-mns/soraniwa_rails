@@ -96,6 +96,7 @@ var data_date = {
         next: "fa fa-arrow-right"
     }
 };
+
 // ページ移動時の発火処理
 var turboReady = function(){
 	var url     = location.href;
