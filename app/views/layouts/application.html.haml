@@ -41,6 +41,7 @@
                 %span.caret
               .dropdown-menu
                 = link_to "ステータスグラフ", status_graphs_path + "?graph=on", class: "dropdown-item"
+                = link_to "設定スキル遷移グラフ", skill_history_path + "?graph=on", class: "dropdown-item"
             %li.nav-item.dropdown
               %a.nav-link.dropdown-toggle#themes{ :data => {:toggle =>"dropdown"}, :href => "#"}
                 新出データ

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :parties
   resources :aps
   resources :garden_names
+  get "skill/history",  :to => "skills#history",  :as => "skill_history"
   resources :skills
   resources :skill_data
   resources :type_names

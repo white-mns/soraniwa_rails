@@ -1,0 +1,71 @@
+- @page_title = "設定スキル遷移グラフ"
+%h1= @page_title
+
+.card.desc
+  .card-header
+    - act_icon(true)
+    検索仕様
+    - act_desc(true)
+  .card-body
+    = render "layouts/base_desc"
+    %p
+      %span.example_select.example_toggle.pointer
+        - help_icon
+        入力例
+        - act_desc(false)
+    #example.closed
+      = render "layouts/input_desc"
+= search_form_for @search, url: skill_history_path do |f|
+  %table.search_toggle.table.table-striped.table-bordered.table-hover
+    %tbody.pointer
+      %tr
+        %td{colspan: "5"}
+          - act_icon(true)
+          絞り込み検索
+          - act_desc(true)
+    %tbody
+      %tr
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "ENo", params_name: "e_no_form", placeholder: "Number")
+        - td_form(f, @form_params, @placeholder, class_name: "formText", label: "キャラクター名", params_name: "pc_name_form", placeholder: "Name")
+      %tr.sep
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "スキル名", params_name: "skill_form", placeholder: "Skill", colspan: 3)
+      %tr.sep
+        %td.indent
+        - td_date_between_form(f, @form_params, @placeholder, class_name: nil,  label: "取得日", params_name: "created_at", data_target: "date", placeholder: nil, colspan: 3)
+
+    - #==========================================================================================================================
+    - tbody_toggle(@form_params, params_name: "show_old_top",
+                    label: {open: "設定数上位カードで絞り込む", close: "設定数上位カードで絞り込まない"}, base_first: true)
+    %tbody
+      %tr
+      %tr
+        %td.indent
+        %td= f.label :pre_gt0_form, '絞り込み'
+        %td{colspan: "3"}
+          - div_date_form(f, @form_params, @placeholder, class_name: nil, colspan: 3, params_name: "old_rank_date_form", data_target: "old_rank_date")
+          　時点の
+      %tr
+        %td.indent
+        %td.indent
+        %td{colspan: "3"}
+          上位
+          = text_field_tag :old_rank_num_form, @form_params["old_rank_num_form"]
+          種類
+
+    - #==========================================================================================================================
+    %tbody
+      %tr.sep
+        %td.indent
+        %td.indent= hidden_field_tag :is_form, 1
+        %td{colspan: "3"}
+          - search_submit_button
+
+%h3.graph_title スキル設定数
+= line_chart Skill.notnil_date().where_old_top(@form_params["show_old_top"], params).search(params[:q]).result.to_skill_history_graph(params, :skill_id), ytitle:"人数", library: {style: "min-width:900px;"}, library: @library_param
+%br
+
+%h3.graph_title スキル設定人数
+= line_chart Skill.notnil_date().where_old_user_top(@form_params["show_old_top"], params).group(:created_at).group(:e_no).group(:skill_id).search(params[:q]).result.to_skill_history_graph(params, :skill_id), ytitle:"人数", library: {style: "min-width:900px;"}, library: @library_param

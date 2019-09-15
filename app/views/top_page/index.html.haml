@@ -28,6 +28,7 @@
           %li グラフデータ
           %ul  
             %li= link_to "ステータスグラフ", status_graphs_path + "?graph=on"
+            %li= link_to "設定スキル遷移グラフ", skill_history_path + "?graph=on"
       .col-md-6
         %ul
           %li 新出データ
@@ -43,6 +44,9 @@
       %ul
         %li
           = link_to "ステータスグラフ", status_graphs_path + "?graph=on"
+          を公開
+        %li
+          = link_to "設定スキル遷移グラフ", skill_history_path + "?graph=on"
           を公開
       %li 2019/8/22
       %ul

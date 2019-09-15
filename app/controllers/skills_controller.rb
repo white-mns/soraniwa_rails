@@ -12,6 +12,21 @@ class SkillsController < ApplicationController
     @skills	= @search.result.per(50)
   end
 
+  # GET /skill/history
+  def history
+    placeholder_set
+    param_set
+    @count	= Skill.notnil_date().includes(:pc_name, :type, :nature, :timing, [skill: :cost], [status: :type]).search(params[:q]).result.hit_count()
+    @search	= Skill.notnil_date().includes(:pc_name, :type, :nature, :timing, [skill: :cost], [status: :type]).page(params[:page]).search(params[:q])
+    @search.sorts = "id asc" if @search.sorts.empty?
+    @skills	= @search.result.per(50)
+
+    @library_param = {
+        backgroundColor: "#fffcf8",
+        hAxis: { format: 'MM/dd' }
+    }
+  end
+
   def param_set
     @form_params = {}
 
@@ -19,7 +34,14 @@ class SkillsController < ApplicationController
 
     params_clean(params)
     if !params["is_form"] then
-        params["created_at_gteq_form"] ||= @latest_created.to_date.to_s
+        if action_name != "history" then
+            params["created_at_gteq_form"] ||= @latest_created.to_date.to_s
+        else
+            params["created_at_gteq_form"] ||= (@latest_created - 2.months).to_date.to_s
+            params["old_rank_date_form"] = @latest_created.to_date.to_s
+            params["old_rank_num_form"] = 5
+        end
+
         params["created_at_lteq_form"] ||= @latest_created.to_date.to_s
     end
 
@@ -55,9 +77,14 @@ class SkillsController < ApplicationController
     @form_params["created_at_gteq_form"] = params["created_at_gteq_form"]
     @form_params["created_at_lteq_form"] = params["created_at_lteq_form"]
 
+    @form_params["old_rank_date_form"] = params["old_rank_date_form"]
+    @form_params["old_rank_num_form"] = params["old_rank_num_form"]
+
     toggle_params_to_variable(params, @form_params, params_name: "show_skill_text")
     toggle_params_to_variable(params, @form_params, params_name: "show_status")
     toggle_params_to_variable(params, @form_params, params_name: "show_status_type")
+    toggle_params_to_variable(params, @form_params, params_name: "show_old_top", first_opened: true)
+    @form_params["base_first"]    = (!params["is_form"]) ? "1" : "0"
   end
   # GET /skills/1
   #def show
