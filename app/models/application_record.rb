@@ -20,6 +20,18 @@ class ApplicationRecord < ActiveRecord::Base
     end
   }
 
+  # 人数グラフの表示
+  scope :to_sum_graph, -> (column) {
+      pluck(column).inject(Hash.new(0)){|hash, a| hash[a] += 1 ; hash}.sort_by{ |k, v| v}
+  }
+
+  # 人数グラフの表示(値=固有名詞IDのとき、固有名詞をラベルとして表示)
+  scope :to_sum_graph_proper_id, -> (column) {
+      proper_name = Hash[*ProperName.pluck(:proper_id, :name).flatten]
+      pluck(column).inject(Hash.new(0)){|hash, a| hash[proper_name[a]] += 1 ; hash}.sort_by{ |k, v| v}
+  }
+
+  # ヒストグラムの表示
   scope :to_range_graph, -> (column) {
       max = self.pluck(column).max
       figure_length = max.to_s.length # 最大桁数の取得
@@ -37,6 +49,7 @@ class ApplicationRecord < ActiveRecord::Base
       pluck(column).inject(Hash.new(0)){|hash, a| floor= (a/range).to_i()*range; hash[floor.to_s.rjust(figure_length) + "～" + (floor+range).to_s.rjust(figure_length)] += 1 ; hash}.sort
   }
 
+  # ヒストグラムの表示（最低値を0以外で指定）
   scope :to_range_variable_min_graph, -> (column) {
       max = self.pluck(column).max
       min = self.pluck(column).min

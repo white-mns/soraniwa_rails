@@ -37,6 +37,12 @@
                 = link_to "獲得アイテム一覧", drops_path, class: "dropdown-item"
             %li.nav-item.dropdown
               %a.nav-link.dropdown-toggle#themes{ :data => {:toggle =>"dropdown"}, :href => "#"}
+                グラフデータ
+                %span.caret
+              .dropdown-menu
+                = link_to "ステータスグラフ", status_graphs_path, class: "dropdown-item"
+            %li.nav-item.dropdown
+              %a.nav-link.dropdown-toggle#themes{ :data => {:toggle =>"dropdown"}, :href => "#"}
                 新出データ
                 %span.caret
               .dropdown-menu
