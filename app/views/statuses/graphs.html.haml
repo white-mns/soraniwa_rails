@@ -1,0 +1,95 @@
+- @page_title = "ステータスグラフ"
+%h1= @page_title
+
+.card.desc
+  .card-header
+    - act_icon(true)
+    検索仕様
+    - act_desc(true)
+  .card-body
+    = render "layouts/base_desc"
+    %p
+      %span.example_select.example_toggle.pointer
+        - help_icon
+        入力例
+        - act_desc(false)
+    #example.closed
+      = render "layouts/input_desc"
+= search_form_for @search do |f|
+  %table.search_toggle.table.table-striped.table-bordered.table-hover
+    %tbody.pointer
+      %tr
+        %td{colspan: "5"}
+          - act_icon(true)
+          絞り込み検索
+          - act_desc(true)
+    %tbody
+      %tr
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "ENo", params_name: "e_no_form", placeholder: "Number")
+        - td_form(f, @form_params, @placeholder, class_name: "formText", label: "キャラクター名", params_name: "pc_name_form", placeholder: "Name")
+      %tr.sep
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "STR", params_name: "str_form", placeholder: "Number")
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "MAG", params_name: "mag_form", placeholder: "Number")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "AGI", params_name: "agi_form", placeholder: "Number")
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "VIT", params_name: "vit_form", placeholder: "Number")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "DEX", params_name: "dex_form", placeholder: "Number")
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "MNT", params_name: "mnt_form", placeholder: "Number")
+      %tr.sep
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "メインタイプ", params_name: "type_form", placeholder: "Type", colspan: 3)
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "推し花", params_name: "fan_of_flower_form", placeholder: "FanFlower", colspan: 3)
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, params_name: "equip_form",label: "隊列", colspan: 3, label_td_class_name: "indent",
+                    checkboxes: [{label: "前列", params_name: "is_front", class_name: "after_space mobile_br"},
+                                 {label: "後列", params_name: "is_back"}])
+      %tr.sep
+        %td.indent
+        - td_date_between_form(f, @form_params, @placeholder, class_name: nil,  label: "取得日", params_name: "created_at", data_target: "date", placeholder: nil, colspan: 3)
+      %tr.sep
+        %td.indent
+        %td.indent= hidden_field_tag :is_form, 1
+        %td{colspan: "3"}
+          - search_submit_button
+
+%h3.graph_title メインタイプ
+= column_chart Status.search(params[:q]).result.to_sum_graph_type_id(:type_id), ytitle:"人数", library: {style: "min-width:900px;"}, library: @library_param
+%br
+
+%h3.graph_title 推し花
+= column_chart Status.search(params[:q]).result.to_sum_graph_proper_id(:fan_of_flower_id), ytitle:"人数", library: {style: "min-width:900px;"}, library: @library_param
+%br
+
+%h3.graph_title STR
+= column_chart Status.search(params[:q]).result.to_range_graph(:str), ytitle:"人数", library: {style: "min-width:900px;"}, library: @library_param
+%br
+
+%h3.graph_title MAG
+= column_chart Status.search(params[:q]).result.to_range_graph(:mag), ytitle:"人数", library: {style: "min-width:900px;"}, library: @library_param
+%br
+
+%h3.graph_title AGI
+= column_chart Status.search(params[:q]).result.to_range_graph(:agi), ytitle:"人数", library: {style: "min-width:900px;"}, library: @library_param
+%br
+
+%h3.graph_title VIT
+= column_chart Status.search(params[:q]).result.to_range_graph(:vit), ytitle:"人数", library: {style: "min-width:900px;"}, library: @library_param
+%br
+
+%h3.graph_title DEX
+= column_chart Status.search(params[:q]).result.to_range_graph(:dex), ytitle:"人数", library: {style: "min-width:900px;"}, library: @library_param
+%br
+
+%h3.graph_title MNT
+= column_chart Status.search(params[:q]).result.to_range_graph(:mnt), ytitle:"人数", library: {style: "min-width:900px;"}, library: @library_param
+%br
+

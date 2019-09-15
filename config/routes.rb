@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :skills
   resources :skill_data
   resources :type_names
+  get "status/graphs",  :to => "statuses#graphs",  :as => "status_graphs"
   resources :statuses
   resources :uploaded_checks
   resources :proper_names
