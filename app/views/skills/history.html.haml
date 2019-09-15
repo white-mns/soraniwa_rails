@@ -15,6 +15,8 @@
         - act_desc(false)
     #example.closed
       = render "layouts/input_desc"
+    %p
+      ※初期状態では最新取得日の設定数トップ5を表示しています
 = search_form_for @search, url: skill_history_path do |f|
   %table.search_toggle.table.table-striped.table-bordered.table-hover
     %tbody.pointer
@@ -38,7 +40,7 @@
 
     - #==========================================================================================================================
     - tbody_toggle(@form_params, params_name: "show_old_top",
-                    label: {open: "設定数上位カードで絞り込む", close: "設定数上位カードで絞り込まない"}, base_first: true)
+                    label: {open: "設定数上位スキルで絞り込む", close: "設定数上位スキルで絞り込まない"}, base_first: true)
     %tbody
       %tr
       %tr
