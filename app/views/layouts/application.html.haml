@@ -7,6 +7,7 @@
     %meta{http: {equiv: "X-UA-Compatible"}, content: "IE=edge"}
     = csrf_meta_tags
     = csp_meta_tag
+    = favicon_link_tag('favicon.ico')
 
     = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track": "reload"
     = javascript_include_tag "application", "data-turbolinks-track": "reload"
@@ -56,7 +57,9 @@
       
       %footer
         %p
-          制作#{link_to "@white_mns", "http://twitter.com/white_mns"}
+          Twitter：#{link_to "@data_teiki", "http://twitter.com/data_teiki"}
+          %br
+          制作：#{link_to "@white_mns", "http://twitter.com/white_mns"}
           %br
           = link_to "プライバシーポリシー", top_page_privacy_path
           %br
