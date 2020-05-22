@@ -6,7 +6,7 @@ class ApplicationRecord < ActiveRecord::Base
   }
 
   scope :notnil_date, -> () {
-    where.not(created_at: nil)
+    where.not(created_at: 0)
   }
 
   # 検索ヒット件数の取得
