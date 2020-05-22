@@ -1,8 +1,10 @@
 %h1 ソラニワデータ小屋
 %p
   このサイトでは
-  %a{:href => "http://st.x0.to/", :target => "_blank"} ソラニワ -Stroll Green-
+  %a{:href => "http://st.x0.to/", :target => "_blank"} Stroll Green -Green Festival-
   を解析して得られる情報を扱っています。
+%p
+  = link_to "⇒前期：ソラニワ1期データ小屋", "https://data.teiki.org/soraniwa_1/"
 %br
 %p= top_date_text(@latest_created, @uploaded_created)
 
@@ -39,7 +41,18 @@
 .card.top
   .card-body
     %h2 更新履歴
-    %ul
+    %div
+      %ul
+        %li 2020/5/22
+        %ul
+          %li
+            Stroll Green -Green Festival-の結果データに差し替え
+    %p
+      %span.example_select.example_toggle.pointer
+        = fa_icon "history"
+        古い履歴
+        - act_desc(false)
+    .closed
       %li 2019/9/15
       %ul
         %li
