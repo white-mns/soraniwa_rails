@@ -31,9 +31,6 @@
       %tr
         %td.indent
         - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "キャラクター名", params_name: "name_form", placeholder: "Name")
-      %tr
-        %td.indent
-        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "愛称", params_name: "nickname_form")
       %tr.sep
         %td.indent
         %td.indent= hidden_field_tag :is_form, 1
@@ -51,12 +48,10 @@
   %thead
     %tr
       %th= sort_link(@search, :e_no,"キャラクター(ENo)", default_order: :desc)
-      %th= sort_link(@search, :nickname, "愛称", default_order: :desc)
       %th.sep{colspan: "2"} 結果リンク
   %tbody
     - @names.each do |name|
       %tr
         %td= pc_name_text(name.e_no, name)
-        %td= name.nickname
         %td.sep= character_link(name.e_no)
 = paginate(@names)
