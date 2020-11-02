@@ -7,15 +7,14 @@
 実際に動いているサイトです。  
 [ソラニワデータ小屋](https://data.teiki.org/soraniwa/)
  
-
 # 動作環境
 以下の環境での動作を確認しています  
   
-OS:CentOS release 6.5 (Final)  
-DB:MySQL 8.0.13  
-Ruby:2.5.0  
-Rails:5.2.1  
-gcc:7.3.1
+OS:CentOS Linux release 8.2.2004  
+DB:MySQL 8.0.21  
+Ruby:2.7.1  
+Rails:6.x  
+gcc:8.3.1
 
 ## 使い方
 ・Railsの使い方を調べてなんやかんやして自分のRailsアプリが動くようにします。  
@@ -26,9 +25,7 @@ gcc:7.3.1
 ・動かします。  
 
     cd soraniwa_rails
-    bundle install --path vendor/bundler
-（Gemのインストール先をアプリのディレクトリ内のvendor/bundleに指定します。  
-　この指定を行わない場合、システム全体で共有されるgemを利用します）  
+    bundle install
 
 ・DBを作成し、必要なテーブルの設定を行います。
  
@@ -37,7 +34,7 @@ gcc:7.3.1
     ./unicorn start
     
 他の方法でRailsが動かせるならUnicornである必要はありません。  
-ちなみにデータ小屋は開発環境をUnicorn(アプリ一つずつ再起動できる)、本番環境をPassenger（しばらく利用されてないアプリは眠らせられる）としています。
+データ小屋は開発環境をUnicorn(アプリ一つずつ再起動できる)、本番環境をPassenger（しばらく利用されてないアプリは眠らせられる）としています。
 デフォルトの設定だと`http://サーバーのアドレス:61000`で画面が見れます。
 
 ## 動かない場合
