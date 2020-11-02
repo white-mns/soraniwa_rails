@@ -17,26 +17,28 @@
       .col-md-6
         %ul
           %li 個人データ
-          %ul  
+          %ul
+            %li= link_to "キャラクター一覧", names_path
+            %br
             %li= link_to "ステータス一覧", statuses_path
             %li= link_to "設定スキル一覧", skills_path
       .col-md-6
         %ul
           %li 結果データ
-          %ul  
+          %ul
             %li= link_to "結果一覧", aps_path
             %li= link_to "獲得アイテム一覧", drops_path
     .row
       .col-md-6
         %ul
           %li グラフデータ
-          %ul  
+          %ul
             %li= link_to "ステータスグラフ", status_graphs_path + "?graph=on"
             %li= link_to "設定スキル遷移グラフ", skill_history_path + "?graph=on"
       .col-md-6
         %ul
           %li 新出データ
-          %ul  
+          %ul
             %li= link_to "新出設定スキル一覧", new_skills_path
             %li= link_to "新出獲得アイテム一覧", new_drops_path
 
