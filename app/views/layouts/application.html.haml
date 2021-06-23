@@ -16,7 +16,7 @@
   %body
     %nav.navbar.navbar-expand-md.fixed-top.navbar-light.bg-light.navbar-custom.p-0
       .container
-        = link_to "ソラニワデータ小屋", root_path, :class => "navbar-brand"
+        = link_to "ソラニワGFデータ小屋", root_path, :class => "navbar-brand"
         %button.navbar-toggler{type: "button", data: {toggle: "collapse", target: "#navbarResponsive"}, area: {controls: "navbarResponsive", expanded: "false", label: "Toggle navigation"}}
           %span.navbar-toggler-icon
         .collapse.navbar-collapse#navbarResponsive
@@ -67,6 +67,8 @@
           %br
           %br
           ソースコード [#{link_to "解析部分", "https://github.com/white-mns/soraniwa_parse"}] [#{link_to "表示部分", "https://github.com/white-mns/soraniwa_rails"}]
+          %br
+          #{link_to "次期：ソラニワデータ小屋", "https://data.teiki.org/soraniwa/"}
           %br
           #{link_to "前期：ソラニワ1期データ小屋", "https://data.teiki.org/soraniwa_1/"}
           %br
