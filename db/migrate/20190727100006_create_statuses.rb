@@ -11,7 +11,6 @@ class CreateStatuses < ActiveRecord::Migration[5.2]
       t.integer :type_id
       t.integer :fan_of_flower_id
       t.integer :line_id
-      t.integer :created_at
 
       t.timestamps
     end
