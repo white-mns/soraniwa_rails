@@ -1,12 +1,10 @@
 %h1 ソラニワデータ小屋
 %p
   このサイトでは『
-  %a{:href => "http://st.x0.to/", :target => "_blank"} Stroll Green -Green Festival-
+  %a{:href => "http://st.x0.to/", :target => "_blank"} Stroll Green -restroll-
   』を解析して得られる情報を扱っています。
-  %br
-  ゲーム終了に伴い、全戦闘結果から取得したデータを残しています。
 %p
-  = link_to "⇒前期：ソラニワ1期データ小屋", "https://data.teiki.org/soraniwa_1/"
+  = link_to "⇒前期：ソラニワGFデータ小屋", "https://data.teiki.org/soraniwa_2/"
 %br
 %p= top_date_text(@latest_created, @uploaded_created)
 
@@ -47,6 +45,17 @@
     %h2 更新履歴
     %div
       %ul
+        %li 2021/6/23
+        %ul
+          %li
+            Stroll Green -restroll-の結果データに差し替え
+    %p
+      %span.example_select.example_toggle.pointer
+        = fa_icon "history"
+        古い履歴
+        - act_desc(false)
+    .closed
+      %ul
         %li 2020/6/16
         %ul
           %li
@@ -58,44 +67,38 @@
         %ul
           %li
             Stroll Green -Green Festival-の結果データに差し替え
-    %p
-      %span.example_select.example_toggle.pointer
-        = fa_icon "history"
-        古い履歴
-        - act_desc(false)
-    .closed
-      %li 2019/9/15
-      %ul
-        %li
-          = link_to "ステータスグラフ", status_graphs_path + "?graph=on"
-          を公開
-        %li
-          = link_to "設定スキル遷移グラフ", skill_history_path + "?graph=on"
-          を公開
-      %li 2019/8/22
-      %ul
-        %li
-          = link_to "獲得アイテム一覧", drops_path
-          、
-          = link_to "新出設定スキル一覧", new_skills_path
-          、
-          = link_to "新出獲得アイテム一覧", new_drops_path
-          を公開
-      %li 2019/8/13
-      %ul
-        %li
-          = link_to "設定スキル一覧", skills_path
-          に性質、発動数、消費コストを表示、検索ができるように
-      %li 2019/8/1
-      %ul
-        %li
-          = link_to "結果一覧", aps_path
-          を公開
-      %li 2019/7/30
-      %ul
-        %li
-          = link_to "設定スキル一覧", skills_path
-          にステータス、メインタイプでの絞り込み機能を追加
-      %li 2019/7/28
-      %ul
-        %li サイト公開
+        %li 2019/9/15
+        %ul
+          %li
+            = link_to "ステータスグラフ", status_graphs_path + "?graph=on"
+            を公開
+          %li
+            = link_to "設定スキル遷移グラフ", skill_history_path + "?graph=on"
+            を公開
+        %li 2019/8/22
+        %ul
+          %li
+            = link_to "獲得アイテム一覧", drops_path
+            、
+            = link_to "新出設定スキル一覧", new_skills_path
+            、
+            = link_to "新出獲得アイテム一覧", new_drops_path
+            を公開
+        %li 2019/8/13
+        %ul
+          %li
+            = link_to "設定スキル一覧", skills_path
+            に性質、発動数、消費コストを表示、検索ができるように
+        %li 2019/8/1
+        %ul
+          %li
+            = link_to "結果一覧", aps_path
+            を公開
+        %li 2019/7/30
+        %ul
+          %li
+            = link_to "設定スキル一覧", skills_path
+            にステータス、メインタイプでの絞り込み機能を追加
+        %li 2019/7/28
+        %ul
+          %li サイト公開
