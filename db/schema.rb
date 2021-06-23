@@ -2,17 +2,17 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# Note that this schema.rb definition is the authoritative source for your
-# database schema. If you need to create the application database on another
-# system, you should be using db:schema:load, not running all the migrations
-# from scratch. The latter is a flawed and unsustainable approach (the more migrations
-# you'll amass, the slower it'll run and the greater likelihood for issues).
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
+# be faster and is potentially less error prone than running all of your
+# migrations from scratch. Old migrations may fail to apply correctly if those
+# migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 2019_08_22_083606) do
 
-  create_table "aps", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+  create_table "aps", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.integer "ap_no"
     t.integer "action_type"
     t.integer "garden_id"
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 2019_08_22_083606) do
     t.index ["special_battle"], name: "index_aps_on_special_battle"
   end
 
-  create_table "drops", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+  create_table "drops", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.integer "ap_no"
     t.integer "drop_id"
     t.datetime "created_at", null: false
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 2019_08_22_083606) do
     t.index ["drop_id"], name: "index_drops_on_drop_id"
   end
 
-  create_table "enemies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+  create_table "enemies", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.integer "ap_no"
     t.integer "enemy_id"
     t.integer "suffix_id"
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 2019_08_22_083606) do
     t.index ["suffix_id"], name: "index_enemies_on_suffix_id"
   end
 
-  create_table "enemy_data", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+  create_table "enemy_data", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.integer "enemy_id"
     t.string "name"
     t.integer "line_id"
@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 2019_08_22_083606) do
     t.index ["type_id"], name: "index_enemy_data_on_type_id"
   end
 
-  create_table "garden_names", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+  create_table "garden_names", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.integer "garden_id"
     t.string "name"
     t.datetime "created_at", null: false
@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 2019_08_22_083606) do
     t.index ["name"], name: "index_garden_names_on_name"
   end
 
-  create_table "names", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+  create_table "names", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.integer "e_no"
     t.string "name"
     t.string "nickname"
@@ -90,7 +90,7 @@ ActiveRecord::Schema.define(version: 2019_08_22_083606) do
     t.index ["nickname"], name: "index_names_on_nickname"
   end
 
-  create_table "new_drops", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+  create_table "new_drops", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.integer "ap_no"
     t.integer "drop_id"
     t.datetime "created_at", null: false
@@ -99,14 +99,14 @@ ActiveRecord::Schema.define(version: 2019_08_22_083606) do
     t.index ["drop_id"], name: "index_new_drops_on_drop_id"
   end
 
-  create_table "new_skills", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+  create_table "new_skills", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.integer "skill_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["skill_id"], name: "index_new_skills_on_skill_id"
   end
 
-  create_table "parties", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+  create_table "parties", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.integer "ap_no"
     t.integer "e_no"
     t.integer "party_order"
@@ -116,7 +116,7 @@ ActiveRecord::Schema.define(version: 2019_08_22_083606) do
     t.index ["party_order"], name: "index_parties_on_party_order"
   end
 
-  create_table "proper_names", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+  create_table "proper_names", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.integer "proper_id"
     t.string "name"
     t.datetime "created_at", null: false
@@ -125,7 +125,7 @@ ActiveRecord::Schema.define(version: 2019_08_22_083606) do
     t.index ["proper_id"], name: "index_proper_names_on_proper_id"
   end
 
-  create_table "skill_data", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+  create_table "skill_data", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.integer "skill_id"
     t.string "name"
     t.integer "cost_id"
@@ -137,7 +137,7 @@ ActiveRecord::Schema.define(version: 2019_08_22_083606) do
     t.index ["skill_id"], name: "index_skill_data_on_skill_id"
   end
 
-  create_table "skills", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+  create_table "skills", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.integer "e_no"
     t.integer "set_no"
     t.integer "skill_type_id"
@@ -157,7 +157,7 @@ ActiveRecord::Schema.define(version: 2019_08_22_083606) do
     t.index ["use_number"], name: "index_skills_on_use_number"
   end
 
-  create_table "statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+  create_table "statuses", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.integer "e_no"
     t.integer "str"
     t.integer "mag"
@@ -183,7 +183,7 @@ ActiveRecord::Schema.define(version: 2019_08_22_083606) do
     t.index ["vit"], name: "index_statuses_on_vit"
   end
 
-  create_table "type_names", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+  create_table "type_names", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.integer "type_id"
     t.string "name"
     t.datetime "created_at", null: false
@@ -192,7 +192,7 @@ ActiveRecord::Schema.define(version: 2019_08_22_083606) do
     t.index ["type_id"], name: "index_type_names_on_type_id"
   end
 
-  create_table "uploaded_checks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+  create_table "uploaded_checks", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
