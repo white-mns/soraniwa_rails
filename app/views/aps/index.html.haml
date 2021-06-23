@@ -190,5 +190,5 @@
         - if @form_params["show_enemy"] == "1"
           %td.sep
             - enemy_members(ap.enemy_members) if ap.enemy_members
-        %td.sep= ap_link(ap.ap_no)
+        %td.sep= ap_link(ap.ap_no, ap.action_type)
 = paginate(@aps)

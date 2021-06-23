@@ -30,18 +30,17 @@ module ApplicationHelper
 
     def character_link(e_no)
         if e_no <= 0 then return end
-        if true then return end
 
         file_name = sprintf("%d",e_no)
         link_to " キャラクター", "http://st.x0.to/?mode=profile&eno="+file_name+"", :target => "_blank"
     end
  
-    def ap_link(ap_no)
+    def ap_link(ap_no, action_type)
         if ap_no <= 0 then return end
-        if true then return end
 
         file_name = sprintf("%d",ap_no)
-        link_to " 結果", "http://st.x0.to/result/"+file_name+".html", :target => "_blank"
+        domain = (action_type == 0) ? "http://st.x0.to" : "http://uranus.sakura.ne.jp/_soraniwa"
+        link_to " 結果", domain + "/result/"+file_name+".html", :target => "_blank"
     end
 
     def search_submit_button()

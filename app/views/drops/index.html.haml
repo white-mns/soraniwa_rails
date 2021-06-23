@@ -94,5 +94,5 @@
         %td= progress_text(drop.ap)
         %td.sep= drop.drop.name if drop.drop
         %td.sep= drop.ap.created_at.to_s(:jp_date)
-        %td.sep= ap_link(drop.ap_no)
+        %td.sep= ap_link(drop.ap_no, drop.ap.action_type)
 = paginate(@drops)
