@@ -6,8 +6,8 @@ class EnemyDataController < ApplicationController
   def index
     placeholder_set
     param_set
-    @count	= EnemyDatum.includes(:type).search(params[:q]).result.hit_count()
-    @search	= EnemyDatum.includes(:type).page(params[:page]).search(params[:q])
+    @count	= EnemyDatum.includes(:type).ransack(params[:q]).result.hit_count()
+    @search	= EnemyDatum.includes(:type).page(params[:page]).ransack(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty?
     @enemy_data	= @search.result.per(50)
   end

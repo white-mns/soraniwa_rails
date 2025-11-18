@@ -6,8 +6,8 @@ class DropsController < ApplicationController
   def index
     placeholder_set
     param_set
-    @count	= Drop.notnil_date().includes(:drop, [ap: [:garden, leader: :pc_name]]).where_leader(@params_leader).search(params[:q]).result.hit_count()
-    @search	= Drop.notnil_date().includes(:drop, [ap: [:garden, leader: :pc_name]]).where_leader(@params_leader).page(params[:page]).search(params[:q])
+    @count	= Drop.notnil_date().includes(:drop, [ap: [:garden, leader: :pc_name]]).where_leader(@params_leader).ransack(params[:q]).result.hit_count()
+    @search	= Drop.notnil_date().includes(:drop, [ap: [:garden, leader: :pc_name]]).where_leader(@params_leader).page(params[:page]).ransack(params[:q])
     @search.sorts = "ap_no desc" if @search.sorts.empty?
     @drops	= @search.result.per(50)
   end
