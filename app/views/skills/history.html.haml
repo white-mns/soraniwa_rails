@@ -66,8 +66,8 @@
           - search_submit_button
 
 %h3.graph_title スキル設定数
-= line_chart Skill.notnil_date().where_old_top(@form_params["show_old_top"], params).search(params[:q]).result.to_skill_history_graph(params, :skill_id), ytitle:"人数", library: {style: "min-width:900px;"}, library: @library_param
+= line_chart Skill.notnil_date().where_old_top(@form_params["show_old_top"], params).ransack(params[:q]).result.to_skill_history_graph(params, :skill_id), ytitle:"人数", library: {style: "min-width:900px;"}, library: @library_param
 %br
 
 %h3.graph_title スキル設定人数
-= line_chart Skill.notnil_date().where_old_user_top(@form_params["show_old_top"], params).group(:created_at).group(:e_no).group(:skill_id).search(params[:q]).result.to_skill_history_graph(params, :skill_id), ytitle:"人数", library: {style: "min-width:900px;"}, library: @library_param
+= line_chart Skill.notnil_date().where_old_user_top(@form_params["show_old_top"], params).group(:created_at).group(:e_no).group(:skill_id).ransack(params[:q]).result.to_skill_history_graph(params, :skill_id), ytitle:"人数", library: {style: "min-width:900px;"}, library: @library_param
