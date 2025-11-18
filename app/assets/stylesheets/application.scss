@@ -183,6 +183,14 @@ p.formNum {
     display:none;
 }
 
+.table-striped>tbody>tr:nth-of-type(odd)>* {
+    --bs-table-bg-type: #faf0e0;
+}
+
+.table-striped>tbody>tr:nth-of-type(even)>* {
+    --bs-table-bg-type: #fdf6e6;
+}
+
 td.sign{
     font-size: x-large;
 }
