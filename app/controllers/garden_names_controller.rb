@@ -6,8 +6,8 @@ class GardenNamesController < ApplicationController
   def index
     placeholder_set
     param_set
-    @count	= GardenName.search(params[:q]).result.hit_count()
-    @search	= GardenName.page(params[:page]).search(params[:q])
+    @count	= GardenName.ransack(params[:q]).result.hit_count()
+    @search	= GardenName.page(params[:page]).ransack(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty?
     @garden_names	= @search.result.per(50)
   end

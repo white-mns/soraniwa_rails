@@ -6,8 +6,8 @@ class NamesController < ApplicationController
   def index
     placeholder_set
     param_set
-    @count	= Name.search(params[:q]).result.hit_count()
-    @search	= Name.page(params[:page]).search(params[:q])
+    @count	= Name.ransack(params[:q]).result.hit_count()
+    @search	= Name.page(params[:page]).ransack(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty?
     @names	= @search.result.per(50)
   end

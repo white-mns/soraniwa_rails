@@ -6,8 +6,8 @@ class TypeNamesController < ApplicationController
   def index
     placeholder_set
     param_set
-    @count	= TypeName.search(params[:q]).result.hit_count()
-    @search	= TypeName.page(params[:page]).search(params[:q])
+    @count	= TypeName.ransack(params[:q]).result.hit_count()
+    @search	= TypeName.page(params[:page]).ransack(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty?
     @type_names	= @search.result.per(50)
   end

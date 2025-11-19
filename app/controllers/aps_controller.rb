@@ -6,8 +6,8 @@ class ApsController < ApplicationController
   def index
     placeholder_set
     param_set
-    @count	= Ap.notnil_date().includes(:garden, [party_members: :pc_name], [leader: :pc_name], [fellow_members: :pc_name], [enemy_members: [:enemy, :suffix]]).where_members(@params_members).where_leader(@params_leader).where_fellows(@params_fellows).search(params[:q]).result.hit_count()
-    @search	= Ap.notnil_date().includes(:garden, [party_members: :pc_name], [leader: :pc_name], [fellow_members: :pc_name], [enemy_members: [:enemy, :suffix]]).where_members(@params_members).where_leader(@params_leader).where_fellows(@params_fellows).page(params[:page]).search(params[:q])
+    @count	= Ap.notnil_date().includes(:garden, [party_members: :pc_name], [leader: :pc_name], [fellow_members: :pc_name], [enemy_members: [:enemy, :suffix]]).where_members(@params_members).where_leader(@params_leader).where_fellows(@params_fellows).ransack(params[:q]).result.hit_count()
+    @search	= Ap.notnil_date().includes(:garden, [party_members: :pc_name], [leader: :pc_name], [fellow_members: :pc_name], [enemy_members: [:enemy, :suffix]]).where_members(@params_members).where_leader(@params_leader).where_fellows(@params_fellows).page(params[:page]).ransack(params[:q])
     @search.sorts = "ap_no desc" if @search.sorts.empty?
     @aps	= @search.result.per(50)
   end

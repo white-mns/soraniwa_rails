@@ -6,8 +6,8 @@ class SkillsController < ApplicationController
   def index
     placeholder_set
     param_set
-    @count	= Skill.notnil_date().includes(:pc_name, :type, :nature, :timing, [skill: :cost], [status: :type]).search(params[:q]).result.hit_count()
-    @search	= Skill.notnil_date().includes(:pc_name, :type, :nature, :timing, [skill: :cost], [status: :type]).page(params[:page]).search(params[:q])
+    @count	= Skill.notnil_date().includes(:pc_name, :type, :nature, :timing, [skill: :cost], [status: :type]).ransack(params[:q]).result.hit_count()
+    @search	= Skill.notnil_date().includes(:pc_name, :type, :nature, :timing, [skill: :cost], [status: :type]).page(params[:page]).ransack(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty?
     @skills	= @search.result.per(50)
   end
@@ -16,8 +16,8 @@ class SkillsController < ApplicationController
   def history
     placeholder_set
     param_set
-    @count	= Skill.notnil_date().includes(:pc_name, :type, :nature, :timing, [skill: :cost], [status: :type]).search(params[:q]).result.hit_count()
-    @search	= Skill.notnil_date().includes(:pc_name, :type, :nature, :timing, [skill: :cost], [status: :type]).page(params[:page]).search(params[:q])
+    @count	= Skill.notnil_date().includes(:pc_name, :type, :nature, :timing, [skill: :cost], [status: :type]).ransack(params[:q]).result.hit_count()
+    @search	= Skill.notnil_date().includes(:pc_name, :type, :nature, :timing, [skill: :cost], [status: :type]).page(params[:page]).ransack(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty?
     @skills	= @search.result.per(50)
 

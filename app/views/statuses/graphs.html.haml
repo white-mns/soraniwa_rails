@@ -62,34 +62,34 @@
           - search_submit_button
 
 %h3.graph_title メインタイプ
-= column_chart Status.search(params[:q]).result.to_sum_graph_type_id(:type_id), ytitle:"人数", library: {style: "min-width:900px;"}, library: @library_param
+= column_chart Status.ransack(params[:q]).result.to_sum_graph_type_id(:type_id), ytitle:"人数", library: {style: "min-width:900px;"}, library: @library_param
 %br
 
 %h3.graph_title 推し花
-= column_chart Status.search(params[:q]).result.to_sum_graph_proper_id(:fan_of_flower_id), ytitle:"人数", library: {style: "min-width:900px;"}, library: @library_param
+= column_chart Status.ransack(params[:q]).result.to_sum_graph_proper_id(:fan_of_flower_id), ytitle:"人数", library: {style: "min-width:900px;"}, library: @library_param
 %br
 
 %h3.graph_title STR
-= column_chart Status.search(params[:q]).result.to_range_graph(:str), ytitle:"人数", library: {style: "min-width:900px;"}, library: @library_param
+= column_chart Status.ransack(params[:q]).result.to_range_graph(:str), ytitle:"人数", library: {style: "min-width:900px;"}, library: @library_param
 %br
 
 %h3.graph_title MAG
-= column_chart Status.search(params[:q]).result.to_range_graph(:mag), ytitle:"人数", library: {style: "min-width:900px;"}, library: @library_param
+= column_chart Status.ransack(params[:q]).result.to_range_graph(:mag), ytitle:"人数", library: {style: "min-width:900px;"}, library: @library_param
 %br
 
 %h3.graph_title AGI
-= column_chart Status.search(params[:q]).result.to_range_graph(:agi), ytitle:"人数", library: {style: "min-width:900px;"}, library: @library_param
+= column_chart Status.ransack(params[:q]).result.to_range_graph(:agi), ytitle:"人数", library: {style: "min-width:900px;"}, library: @library_param
 %br
 
 %h3.graph_title VIT
-= column_chart Status.search(params[:q]).result.to_range_graph(:vit), ytitle:"人数", library: {style: "min-width:900px;"}, library: @library_param
+= column_chart Status.ransack(params[:q]).result.to_range_graph(:vit), ytitle:"人数", library: {style: "min-width:900px;"}, library: @library_param
 %br
 
 %h3.graph_title DEX
-= column_chart Status.search(params[:q]).result.to_range_graph(:dex), ytitle:"人数", library: {style: "min-width:900px;"}, library: @library_param
+= column_chart Status.ransack(params[:q]).result.to_range_graph(:dex), ytitle:"人数", library: {style: "min-width:900px;"}, library: @library_param
 %br
 
 %h3.graph_title MNT
-= column_chart Status.search(params[:q]).result.to_range_graph(:mnt), ytitle:"人数", library: {style: "min-width:900px;"}, library: @library_param
+= column_chart Status.ransack(params[:q]).result.to_range_graph(:mnt), ytitle:"人数", library: {style: "min-width:900px;"}, library: @library_param
 %br
 
