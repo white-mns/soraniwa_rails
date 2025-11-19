@@ -26,7 +26,20 @@ class Skill < ApplicationRecord
                         params_copy[:q][key] = value
                     end
                 end
-                skill_ids << Hash[*Skill.where(created_at: params["old_rank_date_form"]).group(:skill_id).order("count desc").limit(params["old_rank_num_form"].to_i).ransack(params_copy[:q]).result.pluck("skill_id", "COUNT(*) as count").flatten].keys
+
+                # Ransack で where 検索だけ適用
+                skills_filtered = Skill.where(created_at: params["old_rank_date_form"])
+                                       .ransack(params_copy[:q])
+                                       .result
+
+                # 集計・ランキング（COUNT）は別で計算
+                #    order には Arel.sql を使う
+                top_skills = skills_filtered
+                               .group(:skill_id)
+                               .order(Arel.sql("COUNT(*) DESC"))
+                               .limit(params["old_rank_num_form"].to_i)
+
+                skill_ids << Hash[*top_skills.pluck(:skill_id).flat_map { |id| [id, nil] }].keys
 
             where(skill_id: skill_ids.flatten)
         end
@@ -43,7 +56,20 @@ class Skill < ApplicationRecord
                         params_copy[:q][key] = value
                     end
                 end
-                skill_ids = Hash[*Skill.where(created_at: params["old_rank_date_form"]).group(:skill_id).order("count desc").limit(params["old_rank_num_form"].to_i).ransack(params_copy[:q]).result.pluck("skill_id", "COUNT(DISTINCT e_no) as count").flatten].keys
+
+                # Ransack で where 検索だけ適用
+                skills_filtered = Skill.where(created_at: params["old_rank_date_form"])
+                                       .ransack(params_copy[:q])
+                                       .result
+
+                # 集計・ランキング（COUNT）は別で計算
+                #    order には Arel.sql を使う
+                top_skills = skills_filtered
+                               .group(:skill_id)
+                               .order(Arel.sql("COUNT(DISTINCT e_no) DESC"))
+                               .limit(params["old_rank_num_form"].to_i)
+
+                skill_ids << Hash[*top_skills.pluck(:skill_id).flat_map { |id| [id, nil] }].keys
 
             where(skill_id: skill_ids.flatten)
         end
