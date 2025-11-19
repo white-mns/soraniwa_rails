@@ -18,12 +18,12 @@
     %nav.navbar.navbar-expand-md.fixed-top.navbar-light.bg-light.navbar-custom.p-0
       .container
         = link_to "ソラニワデータ小屋", root_path, :class => "navbar-brand"
-        %button.navbar-toggler{type: "button", data: {toggle: "collapse", target: "#navbarResponsive"}, area: {controls: "navbarResponsive", expanded: "false", label: "Toggle navigation"}}
+        %button.navbar-toggler{type: "button", data: {bs: {toggle: "collapse", target: "#navbarNavDropdown"}}, area: {controls: "navbarNavDropdown", expanded: "false", label: "Toggle navigation"}}
           %span.navbar-toggler-icon
         .collapse.navbar-collapse#navbarResponsive
           %ul.navbar-nav
             %li.nav-item.dropdown
-              %a.nav-link.dropdown-toggle#themes{ :data => {:toggle =>"dropdown"}, :href => "#"}
+              %a.nav-link.dropdown-toggle#navbarDropdownMenuLink{ data: {bs: {:toggle =>"dropdown"}}, :href => "#", role: "button", area: {expanded: "false"}}
                 個人データ
                 %span.caret
               .dropdown-menu
@@ -31,23 +31,22 @@
                 .dropdown-divider
                 = link_to "ステータス一覧", statuses_path, class: "dropdown-item"
                 = link_to "設定スキル一覧", skills_path, class: "dropdown-item"
-                .dropdown-divider
             %li.nav-item.dropdown
-              %a.nav-link.dropdown-toggle#themes{ :data => {:toggle =>"dropdown"}, :href => "#"}
+              %a.nav-link.dropdown-toggle#navbarDropdownMenuLink{ data: {bs: {:toggle =>"dropdown"}}, :href => "#", role: "button", area: {expanded: "false"}}
                 結果データ
                 %span.caret
               .dropdown-menu
                 = link_to "結果一覧", aps_path, class: "dropdown-item"
                 = link_to "獲得アイテム一覧", drops_path, class: "dropdown-item"
             %li.nav-item.dropdown
-              %a.nav-link.dropdown-toggle#themes{ :data => {:toggle =>"dropdown"}, :href => "#"}
+              %a.nav-link.dropdown-toggle#navbarDropdownMenuLink{ data: {bs: {:toggle =>"dropdown"}}, :href => "#", role: "button", area: {expanded: "false"}}
                 グラフデータ
                 %span.caret
               .dropdown-menu
                 = link_to "ステータスグラフ", status_graphs_path + "?graph=on", class: "dropdown-item"
                 = link_to "設定スキル遷移グラフ", skill_history_path + "?graph=on", class: "dropdown-item"
             %li.nav-item.dropdown
-              %a.nav-link.dropdown-toggle#themes{ :data => {:toggle =>"dropdown"}, :href => "#"}
+              %a.nav-link.dropdown-toggle#navbarDropdownMenuLink{ data: {bs: {:toggle =>"dropdown"}}, :href => "#", role: "button", area: {expanded: "false"}}
                 新出データ
                 %span.caret
               .dropdown-menu
